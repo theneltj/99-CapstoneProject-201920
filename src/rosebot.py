@@ -30,9 +30,9 @@ import math
 class RoseBot(object):
     def __init__(self):
         # Use these instance variables
-        self.sensor_system = SensorSystem
+        self.sensor_system = SensorSystem()
         self.drive_system = DriveSystem(self.sensor_system)
-        self.arm_and_claw = ArmAndClaw(self.sensor_system)
+        self.arm_and_claw = ArmAndClaw(self.sensor_system.touch_sensor)
 
 
 ###############################################################################
@@ -208,11 +208,10 @@ class ArmAndClaw(object):
                (i.e., 14.2 motor revolutions),
           3. Resets the motor's position to 0.
         """
-        self.raise_arm(self)
+        self.raise_arm()
         while True:
-            top_position = self.motor.get_position()
-            if self.motor.
             self.motor.turn_on(-100)
+
 
     def move_arm_to_position(self, desired_arm_position):
         """
@@ -238,13 +237,13 @@ class SensorSystem(object):
     """
     def __init__(self, touch_sensor, color_sensor, ir_proximity_sensor,
                  ir_beacon_sensor, camera, beacon_system, display_system):
-        self.touch_sensor = touch_sensor
-        self.color_sensor = color_sensor
-        self.ir_proximity_sensor = ir_proximity_sensor
-        self.ir_beacon_sensor = ir_beacon_sensor
-        self.camera = camera
-        self.beacon_system = beacon_system
-        self.display_system = display_system
+        self.touch_sensor = TouchSensor(1)
+        # self.color_sensor = color_sensor
+        # self.ir_proximity_sensor = ir_proximity_sensor
+        # self.ir_beacon_sensor = ir_beacon_sensor
+        # self.camera = camera
+        # self.beacon_system = beacon_system
+        # self.display_system = display_system
 
 
 ###############################################################################
