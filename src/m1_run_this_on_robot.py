@@ -1,7 +1,7 @@
 """
   Capstone Project.  Code to run on the EV3 robot (NOT on a laptop).
   Author:  Your professors (for the framework)
-    and Tyler Thenell.
+    and Tyler J Thenell.
   Winter term, 2018-2019.
 """
 
