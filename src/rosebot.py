@@ -219,6 +219,7 @@ class ArmAndClaw(object):
             if abs(self.motor.get_position()) >= 14.2 * 360:
                 self.motor.turn_off()
                 break
+        self.motor.reset_position()
 
 
     def move_arm_to_position(self, desired_arm_position):
@@ -226,6 +227,20 @@ class ArmAndClaw(object):
         Move its Arm to the given position, where 0 means all the way DOWN.
         The robot must have previously calibrated its Arm.
         """
+        if desired_arm_position > self.motor.get_position():
+            while True:
+                self.motor.turn_on(100)
+                if desired_arm_position <= self.motor.get_position():
+                    self.motor.turn_off()
+                    self.motor.reset_position()
+                    break
+        if desired_arm_position < self.motor.get_position():
+            while True:
+                self.motor.turn_on(-100)
+                if desired_arm_position >= self.motor.get_position():
+                    self.motor.turn_off()
+                    self.motor.reset_position()
+                    break
 
     def lower_arm(self):
 
