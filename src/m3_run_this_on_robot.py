@@ -8,7 +8,7 @@
 import rosebot
 import mqtt_remote_method_calls as com
 import time
-
+import shared_gui_delegate_on_robot
 
 def main():
     """
@@ -20,10 +20,11 @@ def main():
     #run_test_arm()
     #run_test_calibration()
 
-    run_test_move_arm(3000)
-    run_test_move_arm(5112)
-    run_test_move_arm(2000)
-    run_test_move_arm(0)
+    #run_test_move_arm(3000)
+    #run_test_move_arm(5112)
+    #run_test_move_arm(2000)
+    #run_test_move_arm(0)
+    real_thing()
 
 
 def run_test_arm():
@@ -37,6 +38,15 @@ def run_test_calibration():
 def run_test_move_arm(x):
     robot=rosebot.RoseBot()
     robot.arm_and_claw.move_arm_to_position(x)
+
+def real_thing():
+    robot=rosebot.RoseBot()
+    delegate=shared_gui_delegate_on_robot.ResponderToGUIMessages(robot)
+    mqtt_receiver = com.MqttClient(delegate)
+    mqtt_receiver.connect_to_pc()
+
+    while True:
+        time.sleep(0.01)
 
 
 
