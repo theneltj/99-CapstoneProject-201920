@@ -231,16 +231,14 @@ class ArmAndClaw(object):
         """
         if desired_arm_position > self.motor.get_position():
             self.motor.turn_on(100)
-            while True:
-                if desired_arm_position <= self.motor.get_position():
-                    self.motor.turn_off()
-                    break
+            while desired_arm_position <= self.motor.get_position():
+                self.motor.turn_off()
+
         if desired_arm_position < self.motor.get_position():
             self.motor.turn_on(-100)
-            while True:
-                if desired_arm_position >= self.motor.get_position():
-                    self.motor.turn_off()
-                    break
+            while desired_arm_position >= self.motor.get_position():
+                self.motor.turn_off()
+
 
 
     def lower_arm(self):
