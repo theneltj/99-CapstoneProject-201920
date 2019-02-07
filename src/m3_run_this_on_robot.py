@@ -18,12 +18,14 @@ def main():
     """
 
     #run_test_arm()
+
     run_test_calibration()
 
     run_test_move_arm(1000)
     #run_test_move_arm(5112)
     #run_test_move_arm(2000)
     #run_test_move_arm(0)
+
     #real_thing()
 
 
