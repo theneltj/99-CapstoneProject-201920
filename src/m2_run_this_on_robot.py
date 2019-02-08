@@ -14,7 +14,7 @@ import shared_gui_delegate_on_robot
 def main():
     robot = rosebot.RoseBot()
     robot.arm_and_claw.calibrate_arm()
-    robot.arm_and_claw.move_arm_to_position(360*14.2)
+    # robot.arm_and_claw.move_arm_to_position(360*14.2)
     """
     This code, which must run on the EV3 ROBOT:
       1. Makes the EV3 robot to various things.
