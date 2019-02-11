@@ -17,6 +17,7 @@ def main():
     robot.arm_and_claw.calibrate_arm()
     robot.arm_and_claw.move_arm_to_position(180*14.2)
     robot.arm_and_claw.lower_arm()
+    # robot.sound_system.beeper()
 
 
     """
