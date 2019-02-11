@@ -169,6 +169,60 @@ def get_arm_frame(window, mqtt_sender):
 
     return frame
 
+def get_sound_system_frame(window, mqtt_sender):
+    """
+    Constructs and returns a frame on the given window, where the frame
+    has Entry and Button objects that control the EV3 robot's motion
+    by passing messages using the given MQTT Sender.
+      :type  window:       ttk.Frame | ttk.Toplevel
+      :type  mqtt_sender:  com.MqttClient
+    """
+    # Construct the frame to return:
+    frame = ttk.Frame(window, padding=10, borderwidth=5, relief="ridge")
+    frame.grid()
+
+    # Construct the widgets on the frame:
+    frame_label = ttk.Label(frame, text="Sound System")
+
+    number_beeps_entry = ttk.Entry(frame, width=8)
+    freq_entry = ttk.Entry(frame, width=8, justify=tkinter.RIGHT)
+    time_entry = ttk.Entry(frame, width=8)
+    phrase_entry = ttk.Entry(frame, width=8)
+    number_beeps_label = ttk.Label(frame, text="Number:")
+    freq_label = ttk.Label(frame, text="Frequency:")
+    time_label = ttk.Label(frame, text="Seconds:")
+    phrase_label = ttk.Label(frame, text="Phrase:")
+
+    beep_button = ttk.Button(frame, text="Beeper")
+    tone_button = ttk.Button(frame, text="Toner")
+    speak_button = ttk.Button(frame, text="Speaker")
+
+    # Grid the widgets:
+    frame_label.grid(row=0, column=1)
+    beep_button.grid(row=1, column=0)
+    tone_button.grid(row=1, column=1)
+    speak_button.grid(row=1, column=2)
+
+    number_beeps_label.grid(row=2, column=0)
+    freq_label.grid(row=2, column=1)
+    time_label.grid(row=4, column=1)
+    phrase_label.grid(row=2, column=2)
+
+    number_beeps_entry.grid(row=3, column=0)
+    freq_entry.grid(row=3, column=1)
+    time_entry.grid(row=5, column=1)
+    phrase_entry.grid(row=3, column=2)
+
+    # Set the button callbacks:
+    # seconds_button["command"] = lambda: handle_forward(
+    #     seconds_entry, speed_entry, mqtt_sender)
+    # inches_time_button["command"] = lambda: handle_backward(
+    #     distance_entry, speed_entry, mqtt_sender)
+    # inches_encoder_button["command"] = lambda: handle_left(
+    #     distance_entry, speed_entry, mqtt_sender)
+
+
+    return frame
 
 def get_control_frame(window, mqtt_sender):
     """
