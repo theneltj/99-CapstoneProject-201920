@@ -92,10 +92,7 @@ class DriveSystem(object):
         at the given speed for the given number of seconds.
         """
         self.go(speed, speed)
-        while True:
-            current = time.time()
-            if current - seconds >= 0:
-                break
+        time.sleep(seconds)
         self.stop()
 
         
