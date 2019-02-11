@@ -760,7 +760,7 @@ class Beeper(object):
 
         :rtype subprocess.Popen
         """
-        self.beep().wait()
+        
         return self._beeper.beep()
 
 
