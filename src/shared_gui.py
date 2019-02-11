@@ -11,7 +11,7 @@
 
   Author:  Your professors (for the framework and lower-level code)
     and Tyler Thenell, Jacob Jarski, Zack Z.
-  Winter term, 2018-2019. 
+  Winter term, 2018-2019.
 """
 
 import tkinter
