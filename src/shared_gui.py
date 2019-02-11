@@ -212,6 +212,7 @@ def get_sound_system_frame(window, mqtt_sender):
     # Set the button callbacks:
     beep_button["command"] = lambda:handle_beeper(number_beeps_entry,mqtt_sender)
     tone_button["command"] = lambda: handle_tone(freq_entry,time_entry,mqtt_sender)
+    speak_button["command"] = lambda: handle_speaker(phrase_entry, mqtt_sender)
 
     return frame
 
@@ -375,6 +376,10 @@ def handle_beeper(number_beeps_entry, mqtt_sender):
 def handle_tone(freq_entry , time_entry, mqtt_sender):
     print('Toner')
     mqtt_sender.send_message('toner', [freq_entry.get(),time_entry.get()])
+
+def handle_speaker(phrase_entry, mqtt_sender):
+    print('Saying the Phrase!')
+    mqtt_sender.send_message('speaker', [phrase_entry.get()])
 
 ###############################################################################
 # Handlers for Buttons in the Drive System frame.
