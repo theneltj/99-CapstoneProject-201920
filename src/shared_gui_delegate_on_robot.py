@@ -47,3 +47,6 @@ class ResponderToGUIMessages(object):
     def beeper(self, n):
         for _ in range(n):
             self.robot.sound_system.beeper.beep().wait()
+
+    def toner(self,Frequency, Length):
+        self.robot.sound_system.tone_maker.play_tone(Frequency,Length)
