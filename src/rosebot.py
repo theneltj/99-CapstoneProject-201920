@@ -72,7 +72,7 @@ class DriveSystem(object):
 
         self.wheel_circumference = 1.3 * math.pi
 
-    # -------------------------------------------------------------------------
+    # ------------------------------------------------------------------------
     # Methods for driving with no external sensor (just the built-in encoders).
     # -------------------------------------------------------------------------
 
