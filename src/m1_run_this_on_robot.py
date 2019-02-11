@@ -23,7 +23,11 @@ def main():
     # robot.arm_and_claw.raise_arm()
     # robot.arm_and_claw.lower_arm()
 
-    robot.drive_system.go_straight_for_seconds(10, 100)
+    robot.drive_system.go_straight_for_inches_using_time(12, 100)
+    time.sleep(5)
+    robot.drive_system.go_straight_for_inches_using_time(12, 50)
+    time.sleep(5)
+    robot.drive_system.go_straight_for_inches_using_time(6, 100)
 
     real_thing()
 
