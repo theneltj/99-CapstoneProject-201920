@@ -115,9 +115,9 @@ def get_drive_system_frame(window, mqtt_sender):
     distance_entry.grid(row=3, column=2)
 
     # Set the button callbacks:
-    seconds_button["command"] = lambda: handle_straight_for_seconds(seconds_entry)
-    inches_time_button["command"] = lambda: handle_straight_for_inches_using_time(distance_entry)
-    inches_encoder_button["command"] = lambda: handle_straight_for_inches_using_encoder(distance_entry)
+    seconds_button["command"] = lambda: handle_straight_for_seconds(seconds_entry, speed_entry, mqtt_sender)
+    inches_time_button["command"] = lambda: handle_straight_for_inches_using_time(distance_entry, speed_entry, mqtt_sender)
+    inches_encoder_button["command"] = lambda: handle_straight_for_inches_using_encoder(distance_entry, speed_entry, mqtt_sender)
 
     return frame
 
@@ -380,14 +380,17 @@ def handle_tone(Frequency,Length,mqtt_sender):
 # Handlers for Buttons in the Drive System frame.
 ###############################################################################
 
-def handle_straight_for_seconds(seconds_entry):
+def handle_straight_for_seconds(seconds_entry, speed_entry, mqtt_sender):
     print('Straight for Seconds')
-    mqtt_sender.send_message('____', [seconds_entry.get()])
+    mqtt_sender.send_message('straight_for_seconds',
+                             [str(int(seconds_entry.get())), str(int(speed_entry.get()))])
 
-def handle_straight_for_inches_using_time(distance_entry):
+def handle_straight_for_inches_using_time(distance_entry, speed_entry, mqtt_sender):
     print('Straight for Inches (Time)')
-    mqtt_sender.send_message('____', [distance_entry.get()])
+    mqtt_sender.send_message('straight_for_inches_using_time',
+                             [str(int(distance_entry.get())), str(int(speed_entry.get()))])
 
-def handle_straight_for_inches_using_encoder(distance_entry):
+def handle_straight_for_inches_using_encoder(distance_entry, speed_entry, mqtt_sender):
     print('Straight for Inches (Encoder)')
-    mqtt_sender.send_message('____', [distance_entry.get()])
+    mqtt_sender.send_message('straight_for_inches_using_encoder',
+                             [str(int(distance_entry.get())), str(int(speed_entry.get()))])

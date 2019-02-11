@@ -43,6 +43,15 @@ class ResponderToGUIMessages(object):
     def exit(self):
         pass
 
+    def straight_for_seconds(self, seconds, speed):
+        self.robot.drive_system.go_straight_for_seconds(int(seconds), int(speed))
+
+    def straight_for_inches_using_time(self, inches, speed):
+        self.robot.drive_system.go_straight_for_inches_using_time(int(inches), int(speed))
+
+    def straight_for_inches_using_encoder(self, inches, speed):
+        self.robot.drive_system.go_straight_for_inches_using_encoder(int(inches), int(speed))
+
     def beeper(self, n):
         for _ in range(n):
             self.robot.sound_system.beeper.beep().wait()
