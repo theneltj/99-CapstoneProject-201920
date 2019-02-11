@@ -26,7 +26,6 @@ class ResponderToGUIMessages(object):
         self.robot.drive_system.stop()
 
     def raise_arm(self):
-        print("---MADE IT---")
         self.robot.arm_and_claw.raise_arm()
 
     def lower_arm(self):
