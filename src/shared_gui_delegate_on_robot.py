@@ -49,3 +49,6 @@ class ResponderToGUIMessages(object):
 
     def toner(self,Frequency, Length):
         self.robot.sound_system.tone_maker.play_tone(Frequency,Length)
+
+    def speaker(self,phrase):
+        self.robot.sound_system.speech_maker.speak(phrase)

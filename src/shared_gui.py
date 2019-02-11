@@ -215,6 +215,7 @@ def get_sound_system_frame(window, mqtt_sender):
     # Set the button callbacks:
     beep_button["command"] = lambda:handle_beeper(number_beeps_entry,mqtt_sender)
     tone_button["command"] = lambda: handle_tone(freq_entry,time_entry,mqtt_sender)
+    speak_button["command"] = lambda: handle_speach(phrase_entry,mqtt_sender)
 
     return frame
 
@@ -378,3 +379,7 @@ def handle_beeper(NumberOfBeeps,mqtt_sender):
 def handle_tone(Frequency,Length,mqtt_sender):
     print('Toner')
     mqtt_sender.send_message('toner', [Frequency.get(),Length.get()])
+
+def handle_speach(Phrase,mqtt_sender):
+    print('Speach_maker')
+    mqtt_sender.send_message('speaker', [Phrase.get()])
