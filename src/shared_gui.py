@@ -368,9 +368,9 @@ def handle_exit(mqtt_sender):
 # Handlers for Buttons in the Sound System frame.
 ###############################################################################
 
-def handle_beeper(NumberOfBeeps,mqtt_sender):
+def handle_beeper(number_beeps_entry, mqtt_sender):
     print('Beeper')
-    mqtt_sender.send_message('beeper', [NumberOfBeeps.get()])
+    mqtt_sender.send_message('beeper', [number_beeps_entry.get()])
 
 def handle_tone(Frequency,Length,mqtt_sender):
     print('Toner')
