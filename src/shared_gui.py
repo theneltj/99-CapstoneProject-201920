@@ -122,7 +122,6 @@ def get_drive_system_frame(window, mqtt_sender):
     inches_encoder_button["command"] = lambda: handle_left(
         distance_entry, speed_entry, mqtt_sender)
 
-
     return frame
 
 def get_arm_frame(window, mqtt_sender):
@@ -220,7 +219,6 @@ def get_sound_system_frame(window, mqtt_sender):
     #     distance_entry, speed_entry, mqtt_sender)
     # inches_encoder_button["command"] = lambda: handle_left(
     #     distance_entry, speed_entry, mqtt_sender)
-
 
     return frame
 
