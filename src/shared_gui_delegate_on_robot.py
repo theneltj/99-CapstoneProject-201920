@@ -25,3 +25,8 @@ class ResponderToGUIMessages(object):
 
     def quit(self):
         self.stop_program = True
+
+
+    def beep_n_times(self, n):
+        for k in range(n):
+            self.robot.sound_system.beeper.beep().wait()
