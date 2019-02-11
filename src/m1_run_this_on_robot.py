@@ -18,12 +18,11 @@ def main():
       2. Communicates via MQTT with the GUI code that runs on the LAPTOP.
     """
     robot = rosebot.RoseBot()
-    robot.arm_and_claw.raise_arm()
-    # real_thing()
+    real_thing()
 
 def real_thing():
     robot = rosebot.RoseBot()
-    delegate = shared_gui_delegate_on_robot(robot)
+    delegate = shared_gui_delegate_on_robot.ResponderToGUIMessages(robot)
     mqtt_receiver = com.MqttClient(delegate)
     mqtt_receiver.connect_to_pc()
 
