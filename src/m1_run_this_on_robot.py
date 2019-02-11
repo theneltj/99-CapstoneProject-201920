@@ -19,11 +19,7 @@ def main():
     """
     robot = rosebot.RoseBot()
     robot.arm_and_claw.raise_arm()
-    robot.arm_and_claw.calibrate_arm()
-    robot.arm_and_claw.raise_arm()
-    robot.arm_and_claw.lower_arm()
-
-    real_thing()
+    # real_thing()
 
 def real_thing():
     robot = rosebot.RoseBot()

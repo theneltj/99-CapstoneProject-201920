@@ -298,9 +298,6 @@ class ArmAndClaw(object):
 
         self.motor.turn_off()
 
-
-
-
     def lower_arm(self):
 
         """
@@ -312,6 +309,7 @@ class ArmAndClaw(object):
 ###############################################################################
 #    SensorSystem
 ###############################################################################
+
 class SensorSystem(object):
     """
     Has all the sensor objects available to the Snatch3r robot, including
