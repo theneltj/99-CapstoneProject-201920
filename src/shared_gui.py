@@ -373,8 +373,8 @@ def handle_exit(mqtt_sender):
 
 def handle_beeper(NumberOfBeeps,mqtt_sender):
     print('Beeper')
-    mqtt_sender.send_message('beeper', [NumberOfBeeps])
+    mqtt_sender.send_message('beeper', [NumberOfBeeps.get()])
 
 def handle_tone(Frequency,Length,mqtt_sender):
     print('Toner')
-    mqtt_sender.send_message('toner', [Frequency,Length])
+    mqtt_sender.send_message('toner', [Frequency.get(),Length.get()])
