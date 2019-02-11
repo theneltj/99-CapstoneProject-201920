@@ -43,3 +43,7 @@ class ResponderToGUIMessages(object):
 
     def exit(self):
         pass
+
+    def beeper(self, n):
+        for _ in range(n):
+            self.robot.sound_system.beeper.beep().wait()
