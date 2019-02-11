@@ -53,7 +53,7 @@ class ResponderToGUIMessages(object):
         self.robot.drive_system.go_straight_for_inches_using_encoder(int(inches), int(speed))
 
     def beeper(self, n):
-        for _ in range(n):
+        for _ in range(int(n)):
             self.robot.sound_system.beeper.beep().wait()
 
     def toner(self,Frequency, Length):
