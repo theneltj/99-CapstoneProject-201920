@@ -34,6 +34,8 @@ def real_thing():
     mqtt_receiver.connect_to_pc()
 
     while True:
+        if delegate.stop_program == True:
+            break
         time.sleep(0.01)
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
