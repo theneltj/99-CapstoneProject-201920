@@ -115,12 +115,9 @@ def get_drive_system_frame(window, mqtt_sender):
     distance_entry.grid(row=3, column=2)
 
     # Set the button callbacks:
-    seconds_button["command"] = lambda: handle_forward(
-        seconds_entry, speed_entry, mqtt_sender)
-    inches_time_button["command"] = lambda: handle_backward(
-        distance_entry, speed_entry, mqtt_sender)
-    inches_encoder_button["command"] = lambda: handle_left(
-        distance_entry, speed_entry, mqtt_sender)
+    seconds_button["command"] = lambda: handle_straight_for_seconds(seconds_entry)
+    inches_time_button["command"] = lambda: handle_straight_for_inches_using_time(distance_entry)
+    inches_encoder_button["command"] = lambda: handle_straight_for_inches_using_encoder(distance_entry)
 
     return frame
 
@@ -378,3 +375,19 @@ def handle_beeper(NumberOfBeeps,mqtt_sender):
 def handle_tone(Frequency,Length,mqtt_sender):
     print('Toner')
     mqtt_sender.send_message('toner', [Frequency.get(),Length.get()])
+
+###############################################################################
+# Handlers for Buttons in the Drive System frame.
+###############################################################################
+
+def handle_straight_for_seconds(seconds_entry):
+    print('Straight for Seconds')
+    mqtt_sender.send_message('____', [seconds_entry.get()])
+
+def handle_straight_for_inches_using_time(distance_entry):
+    print('Straight for Inches (Time)')
+    mqtt_sender.send_message('____', [distance_entry.get()])
+
+def handle_straight_for_inches_using_encoder(distance_entry):
+    print('Straight for Inches (Encoder)')
+    mqtt_sender.send_message('____', [distance_entry.get()])
