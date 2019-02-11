@@ -372,9 +372,9 @@ def handle_beeper(number_beeps_entry, mqtt_sender):
     print('Beeper')
     mqtt_sender.send_message('beeper', [number_beeps_entry.get()])
 
-def handle_tone(Frequency,Length,mqtt_sender):
+def handle_tone(freq_entry , time_entry, mqtt_sender):
     print('Toner')
-    mqtt_sender.send_message('toner', [Frequency.get(),Length.get()])
+    mqtt_sender.send_message('toner', [freq_entry.get(),time_entry.get()])
 
 ###############################################################################
 # Handlers for Buttons in the Drive System frame.
