@@ -15,8 +15,13 @@ class ResponderToGUIMessages(object):
             :type robot: rosebot.RoseBot
         """
         self.robot = robot
+        self.stop_program = False
 
     def go(self, left_wheel_speed, right_wheel_speed):
         left = int(left_wheel_speed)
         right = int(right_wheel_speed)
         self.robot.drive_system.go(left, right)
+
+
+    def quit(self):
+        self.stop_program = True
