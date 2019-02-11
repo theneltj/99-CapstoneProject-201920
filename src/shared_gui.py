@@ -291,7 +291,8 @@ def handle_left(left_entry_box, right_entry_box, mqtt_sender):
       :type  right_entry_box:  ttk.Entry
       :type  mqtt_sender:      com.MqttClient
     """
-
+    print('Left', left_entry_box.get(), right_entry_box.get())
+    mqtt_sender.send_message('left', [str(int(left_entry_box.get())), str(int(right_entry_box.get()))])
 
 def handle_right(left_entry_box, right_entry_box, mqtt_sender):
     """
@@ -301,14 +302,16 @@ def handle_right(left_entry_box, right_entry_box, mqtt_sender):
       :type  right_entry_box:  ttk.Entry
       :type  mqtt_sender:      com.MqttClient
     """
-
+    print('Right', left_entry_box.get(), right_entry_box.get())
+    mqtt_sender.send_message('right', [str(int(left_entry_box.get())), str(int(right_entry_box.get()))])
 
 def handle_stop(mqtt_sender):
     """
     Tells the robot to stop.
       :type  mqtt_sender:  com.MqttClient
     """
-
+    print('Stop')
+    mqtt_sender.send_message('stop')
 
 ###############################################################################
 # Handlers for Buttons in the ArmAndClaw frame.
