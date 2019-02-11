@@ -23,9 +23,9 @@ def main():
     # robot.arm_and_claw.raise_arm()
     # robot.arm_and_claw.lower_arm()
 
-    robot.drive_system.go_straight_for_inches_using_encoder(10, 100)
+    #robot.drive_system.go_straight_for_inches_using_encoder(10, 100)
 
-    # real_thing()
+    real_thing()
 
 def real_thing():
     robot = rosebot.RoseBot()
