@@ -115,15 +115,13 @@ def get_drive_system_frame(window, mqtt_sender):
     distance_entry.grid(row=3, column=2)
 
     # Set the button callbacks:
-    # forward_button["command"] = lambda: handle_forward(
-    #     left_speed_entry, right_speed_entry, mqtt_sender)
-    # backward_button["command"] = lambda: handle_backward(
-    #     left_speed_entry, right_speed_entry, mqtt_sender)
-    # left_button["command"] = lambda: handle_left(
-    #     left_speed_entry, right_speed_entry, mqtt_sender)
-    # right_button["command"] = lambda: handle_right(
-    #     left_speed_entry, right_speed_entry, mqtt_sender)
-    # stop_button["command"] = lambda: handle_stop(mqtt_sender)
+    seconds_button["command"] = lambda: handle_forward(
+        seconds_entry, speed_entry, mqtt_sender)
+    inches_time_button["command"] = lambda: handle_backward(
+        distance_entry, speed_entry, mqtt_sender)
+    inches_encoder_button["command"] = lambda: handle_left(
+        distance_entry, speed_entry, mqtt_sender)
+
 
     return frame
 
