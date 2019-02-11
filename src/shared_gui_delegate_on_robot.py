@@ -20,3 +20,4 @@ class ResponderToGUIMessages(object):
         left = int(left_wheel_speed)
         right = int(right_wheel_speed)
         self.robot.drive_system.go(left, right)
+    
