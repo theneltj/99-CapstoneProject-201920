@@ -49,4 +49,4 @@ class ResponderToGUIMessages(object):
         self.stop_program = True
 
     def exit(self):
-        pass
+        pass 
