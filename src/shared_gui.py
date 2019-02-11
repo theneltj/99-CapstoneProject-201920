@@ -213,12 +213,7 @@ def get_sound_system_frame(window, mqtt_sender):
     phrase_entry.grid(row=3, column=2)
 
     # Set the button callbacks:
-    # seconds_button["command"] = lambda: handle_forward(
-    #     seconds_entry, speed_entry, mqtt_sender)
-    # inches_time_button["command"] = lambda: handle_backward(
-    #     distance_entry, speed_entry, mqtt_sender)
-    # inches_encoder_button["command"] = lambda: handle_left(
-    #     distance_entry, speed_entry, mqtt_sender)
+    beep_button["command"] = lambda:handle_beeper(number_beeps_entry,mqtt_sender)
 
     return frame
 
@@ -370,3 +365,11 @@ def handle_exit(mqtt_sender):
     """
     print('Exit')
     mqtt_sender.send_message("exit")
+
+###############################################################################
+# Handlers for Buttons in the Sound System frame.
+###############################################################################
+
+def handle_beeper(NumberOfBeeps,mqtt_sender):
+    print('Beeper')
+    mqtt_sender.send_message('beeper', [NumberOfBeeps])
