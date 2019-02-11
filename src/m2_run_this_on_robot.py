@@ -18,10 +18,11 @@ def main():
     # robot.arm_and_claw.move_arm_to_position(180*14.2)
     # robot.arm_and_claw.lower_arm()
     # robot.sound_system.beeper.beep()
-    robot.sound_system.tone_maker.play_tone(293, 500)
-    robot.sound_system.tone_maker.play_tone(293, 500)
-    robot.sound_system.tone_maker.play_tone(146, 500)
-    robot.sound_system.tone_maker.play_tone(207, 500)
+    robot.sound_system.tone_maker.play_tone(293, 500).wait()
+    robot.sound_system.tone_maker.play_tone(293, 500).wait()
+    robot.sound_system.tone_maker.play_tone(146, 500).wait()
+    robot.sound_system.tone_maker.play_tone(207, 500).wait()
+
 
 
 
