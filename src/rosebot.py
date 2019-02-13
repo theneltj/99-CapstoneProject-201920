@@ -201,7 +201,8 @@ class DriveSystem(object):
          self.go(-speed , -speed)
          while True:
              if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() >= inches:
-                break
+                 if self.to_resolve_abnormal_values() == True:
+                    break
         self.stop()
 
 
@@ -215,6 +216,16 @@ class DriveSystem(object):
         the robot should move until it is between 6.8 and 7.4 inches
         from the object.
         """
+
+    def to_resolve_abnormal_values(self):
+        average = 0
+        for k in range(4):
+            average = self.sensor_system.ir_proximity_sensor.get_distance_in_inches() + average
+        average = average/4
+        if abs(average - self.sensor_system.ir_proximity_sensor.get_distance_in_inches()) < 3:
+            return True
+        else:
+            return False
 
     # -------------------------------------------------------------------------
     # Methods for driving that use the infrared beacon sensor.
