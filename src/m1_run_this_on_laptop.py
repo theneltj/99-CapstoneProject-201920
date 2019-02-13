@@ -57,6 +57,7 @@ def main():
     # The event loop:
     # -------------------------------------------------------------------------
     root.mainloop()
+    shared_gui.handle_exit(mqtt_sender).exit == True
 
 
 def get_shared_frames(main_frame, mqtt_sender):

@@ -41,7 +41,7 @@ class ResponderToGUIMessages(object):
         self.stop_program = True
 
     def exit(self):
-        pass
+        self.stop_program = True
 
     def straight_for_seconds(self, seconds, speed):
         self.robot.drive_system.go_straight_for_seconds(int(seconds), int(speed))

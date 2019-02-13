@@ -365,6 +365,7 @@ def handle_exit(mqtt_sender):
     print('Exit')
     mqtt_sender.send_message("exit")
 
+
 ###############################################################################
 # Handlers for Buttons in the Sound System frame.
 ###############################################################################
