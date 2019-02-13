@@ -19,7 +19,8 @@ def main():
     """
     robot = rosebot.RoseBot()
     robot.sound_system.beeper.beep()
-    real_thing()
+    robot.drive_system.go_straight_until_color_is_not(6, 50)
+    # real_thing()
 
 def real_thing():
     robot = rosebot.RoseBot()
