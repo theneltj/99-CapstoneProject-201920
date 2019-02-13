@@ -126,7 +126,7 @@ class DriveSystem(object):
         by the color_sensor is less than the given intensity.
         """
         self.go(speed, speed)
-        while self.sensor_system.color_sensor.get_ambient_light_intensity() < intensity:
+        while self.sensor_system.color_sensor.get_reflected_light_intensity() < intensity:
             pass
         self.stop()
 
@@ -136,7 +136,7 @@ class DriveSystem(object):
         by the color_sensor is greater than the given intensity.
         """
         self.go(speed, speed)
-        while self.sensor_system.color_sensor.get_ambient_light_intensity() > intensity:
+        while self.sensor_system.color_sensor.get_reflected_light_intensity() > intensity:
             pass
         self.stop()
 

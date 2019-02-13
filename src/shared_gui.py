@@ -449,11 +449,11 @@ def handle_straight_for_inches_using_encoder(distance_entry, speed_entry, mqtt_s
 
 def handle_straight_until_color_is(color_entry, speed_entry, mqtt_sender):
     print('Straight until color is')
-    mqtt_sender.send_message('straight_until_color_is', [str(int(color_entry.get())), str(int(speed_entry.get()))])
+    mqtt_sender.send_message('straight_until_color_is', [int(color_entry.get()), int(speed_entry.get())])
 
 def handle_straight_until_color_is_not(color_entry, speed_entry, mqtt_sender):
     print('Straight until color is not')
-    mqtt_sender.send_message('straight_until_color_is_not', [str(int(color_entry.get())), str(int(speed_entry.get()))])
+    mqtt_sender.send_message('straight_until_color_is_not', [int(color_entry.get()), int(speed_entry.get())])
 
 def handle_straight_while_intensity_less_than(intensity_entry, speed_entry, mqtt_sender):
     print('Straight while intensity is less')

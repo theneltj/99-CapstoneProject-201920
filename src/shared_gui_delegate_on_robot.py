@@ -63,10 +63,10 @@ class ResponderToGUIMessages(object):
         self.robot.sound_system.speech_maker.speak(speaker_entry)
 
     def straight_until_color_is(self, color, speed):
-        self.robot.drive_system.go_straight_until_color_is(color, speed)
+        self.robot.drive_system.go_straight_until_color_is_not(color, speed)
 
     def straight_until_color_is_not(self, color, speed):
-        self.robot.drive_system.go_straight_until_color_is_not(color, speed)
+        self.robot.drive_system.go_straight_until_color_is(color, speed)
 
     def straight_while_intensity_less_than(self, intensity, speed):
         self.robot.drive_system.go_straight_until_intensity_is_less_than(intensity, speed)
