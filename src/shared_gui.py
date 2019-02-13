@@ -183,7 +183,7 @@ def get_drive_system_frame(window, mqtt_sender):
     spin_entry.grid(row=4,column=3)
     area_label.grid(row=5,column=3)
     area_entry.grid(row=6,column=3)
-    Object_Info_button.grid(row=6,column=3)
+    Object_Info_button.grid(row=7,column=3)
 
     C_spin_button["command"]=lambda: handle_C_Spin(spin_entry,area_entry,mqtt_sender)
     CC_spin_button["command"]=lambda: handle_CC_Spin(spin_entry,area_entry,mqtt_sender)
