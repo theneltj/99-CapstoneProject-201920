@@ -19,7 +19,7 @@ def main():
 
     #run_test_arm()
 
-    run_test_calibration()
+    #run_test_calibration()
 
     #run_test_move_arm(1000)
     #run_test_move_arm(5112)
@@ -27,6 +27,9 @@ def main():
     #run_test_move_arm(0)
 
     #real_thing()
+    #run_test_get_blob_data()
+    #run_test_turn_C(100,3000)
+    run_test_turn_CC(50,3000)
 
 
 def run_test_arm():
@@ -50,6 +53,17 @@ def real_thing():
     while True:
         time.sleep(0.01)
 
+def run_test_get_blob_data():
+    robot=rosebot.RoseBot()
+    robot.drive_system.display_camera_data()
+
+def run_test_turn_C(speed,area):
+    robot=rosebot.RoseBot()
+    robot.drive_system.spin_clockwise_until_sees_object(speed,area)
+
+def run_test_turn_CC(speed,area):
+    robot=rosebot.RoseBot()
+    robot.drive_system.spin_counterclockwise_until_sees_object(speed,area)
 
 
 

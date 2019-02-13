@@ -199,9 +199,13 @@ class DriveSystem(object):
         print(self.sensor_system.ir_proximity_sensor.get_distance_in_inches())
         if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() < inches:
          self.go(-speed , -speed)
+         placeholder_variable_2 = 0
          while True:
+             placeholder_variable_1 = self.sensor_system.ir_proximity_sensor.get_distance_in_inches()
              if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() >= inches:
-                break
+                 if abs(placeholder_variable_1 - placeholder_variable_2) < 2:
+                    break
+             placeholder_variable_2 = placeholder_variable_1
         self.stop()
 
 
@@ -215,6 +219,8 @@ class DriveSystem(object):
         the robot should move until it is between 6.8 and 7.4 inches
         from the object.
         """
+
+
 
     # -------------------------------------------------------------------------
     # Methods for driving that use the infrared beacon sensor.
@@ -248,7 +254,8 @@ class DriveSystem(object):
         Displays on the GUI the Blob data of the Blob that the camera sees
         (if any).
         """
-        self.sensor_system.camera.get_biggest_blob()
+        print(self.sensor_system.camera.get_biggest_blob())
+
 
     def spin_clockwise_until_sees_object(self, speed, area):
         """
@@ -256,6 +263,9 @@ class DriveSystem(object):
         of the trained color whose area is at least the given area.
         Requires that the user train the camera on the color of the object.
         """
+        while self.sensor_system.camera.get_biggest_blob().get_area()<area:
+            self.go(speed,-speed)
+        self.stop()
 
     def spin_counterclockwise_until_sees_object(self, speed, area):
         """
@@ -263,6 +273,9 @@ class DriveSystem(object):
         of the trained color whose area is at least the given area.
         Requires that the user train the camera on the color of the object.
         """
+        while self.sensor_system.camera.get_biggest_blob().get_area()<area:
+            self.go(-speed,speed)
+        self.stop()
 
 ###############################################################################
 #    ArmAndClaw
