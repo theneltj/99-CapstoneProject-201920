@@ -7,6 +7,7 @@
   Winter term, 2018-2019.
 """
 import rosebot
+import time
 
 class ResponderToGUIMessages(object):
     def __init__(self, robot):
@@ -82,3 +83,22 @@ class ResponderToGUIMessages(object):
 
     def Display_Info(self):
         self.robot.drive_system.display_camera_data()
+
+    #Feature 9 Person 3
+
+    def Flashy_Pickup(self,speed,increase):
+        self.robot.drive_system.go(50,50)
+        time_on=speed
+        while self.robot.sensor_system.ir_proximity_sensor.get_distance()>10:
+            self.robot.led_system.left_led.turn_on()
+            time.sleep(float(time_on))
+            self.robot.led_system.left_led.turn_off()
+            self.robot.led_system.right_led.turn_on()
+            time.sleep(float(time_on))
+            self.robot.led_system.left_led.turn_on()
+            time.sleep(float(time_on))
+            self.robot.led_system.left_led.turn_off()
+            self.robot.led_system.right_led.turn_off()
+            time.sleep(float(time_on))
+            time_on=time_on-increase
+        self.robot.drive_system.stop()

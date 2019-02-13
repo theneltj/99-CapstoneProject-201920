@@ -55,17 +55,41 @@ def main():
     # -------------------------------------------------------------------------
     # TODO: Implement and call get_my_frames(...)
 
+    #Feature 9 Person 3
+    flashy_pickup_frame=ttk.Frame(padding=10,borderwidth=5,relief="groove")
+    flashy_pickup_button=ttk.Button(flashy_pickup_frame,text="Flashy Pickup")
+    speed_label=ttk.Label(flashy_pickup_frame, text='Starting Flash Speed')
+    speed_entry=ttk.Entry(flashy_pickup_frame, width='10')
+    increase_label=ttk.Label(flashy_pickup_frame, text='Flash Speed Increase')
+    increase_entry=ttk.Entry(flashy_pickup_frame, width='10')
+    flashy_pickup_label=ttk.Label(flashy_pickup_frame, text='Flash While Getting an Item')
+
+    flashy_pickup_label.grid(row=0, column=1)
+    flashy_pickup_button.grid(row=1, column=1)
+    speed_label.grid(row=1, column=0)
+    speed_entry.grid(row=2,column=0)
+    increase_label.grid(row=1, column=2)
+    increase_entry.grid(row=2, column=2)
+
+    flashy_pickup_button["command"]=lambda: handle_flashy_pickup(speed_entry,increase_entry,mqtt_sender)
+
+
     # -------------------------------------------------------------------------
     # Grid the frames.
     # -------------------------------------------------------------------------
 
-    grid_frames(teleop_frame,arm_frame,control_frame,drive_system_frame,sound_system_frame)
+    grid_frames(teleop_frame,arm_frame,control_frame,drive_system_frame,sound_system_frame,flashy_pickup_frame)
 
 
     # -------------------------------------------------------------------------
     # The event loop:
     # -------------------------------------------------------------------------
     root.mainloop()
+
+def handle_flashy_pickup(speed,increase,mqtt_sender):
+    print('Flashy Pickup')
+    mqtt_sender.send_message("Flashy_Pickup", [speed.get(), increase.get()])
+
 
 
 
@@ -80,12 +104,13 @@ def get_shared_frames(main_frame, mqtt_sender):
     return teleop_frame, arm_frame, control_frame,drive_system_frame,sound_system_frame
 
 
-def grid_frames(teleop_frame, arm_frame, control_frame,drive_system_frame, sound_system_frame):
+def grid_frames(teleop_frame, arm_frame, control_frame,drive_system_frame, sound_system_frame,flashy_frame):
     teleop_frame.grid(row=0,column=0)
     arm_frame.grid(row=1,column=0)
     control_frame.grid(row=2,column=0)
     drive_system_frame.grid(row=3,column=0)
     sound_system_frame.grid(row=4,column=0)
+    flashy_frame.grid(row=0,column=1)
 
 
 # -----------------------------------------------------------------------------
