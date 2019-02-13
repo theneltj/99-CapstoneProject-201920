@@ -174,7 +174,7 @@ class DriveSystem(object):
         while self.sensor_system.color_sensor.get_color() != color:
             pass
         self.stop()
-        
+
     # -------------------------------------------------------------------------
     # Methods for driving that use the infrared proximity sensor.
     # -------------------------------------------------------------------------
@@ -239,6 +239,7 @@ class DriveSystem(object):
         Displays on the GUI the Blob data of the Blob that the camera sees
         (if any).
         """
+        self.sensor_system.camera.get_biggest_blob()
 
     def spin_clockwise_until_sees_object(self, speed, area):
         """
