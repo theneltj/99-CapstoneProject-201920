@@ -199,10 +199,13 @@ class DriveSystem(object):
         print(self.sensor_system.ir_proximity_sensor.get_distance_in_inches())
         if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() < inches:
          self.go(-speed , -speed)
+         placeholder_variable_2 = 0
          while True:
+             placeholder_variable_1 = self.sensor_system.ir_proximity_sensor.get_distance_in_inches()
              if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() >= inches:
-                 if self.to_resolve_abnormal_values() == True:
+                 if abs(placeholder_variable_1 - placeholder_variable_2) < 2:
                     break
+             placeholder_variable_2 = placeholder_variable_1
         self.stop()
 
 
@@ -217,15 +220,7 @@ class DriveSystem(object):
         from the object.
         """
 
-    def to_resolve_abnormal_values(self):
-        average = 0
-        for k in range(4):
-            average = self.sensor_system.ir_proximity_sensor.get_distance_in_inches() + average
-        average = average/4
-        if abs(average - self.sensor_system.ir_proximity_sensor.get_distance_in_inches()) < 3:
-            return True
-        else:
-            return False
+
 
     # -------------------------------------------------------------------------
     # Methods for driving that use the infrared beacon sensor.
