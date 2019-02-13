@@ -219,15 +219,14 @@ class DriveSystem(object):
     def for_sure(self, inches):
         print(self.sensor_system.ir_proximity_sensor.get_distance_in_inches())
         temp_array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() < inches:
-            for k in range(len(temp_array)):
-                 temp_array[k] = self.sensor_system.ir_proximity_sensor.get_distance_in_inches()
+        for k in range(len(temp_array)):
+            temp_array[k] = self.sensor_system.ir_proximity_sensor.get_distance_in_inches()
             print(temp_array)
-            for k in range(len(temp_array)):
-                if temp_array[k] >= inches:
-                    pass
-                else:
-                    return False
+        for k in range(len(temp_array)):
+            if temp_array[k] >= inches:
+                pass
+            else:
+                return False
 
 
 
