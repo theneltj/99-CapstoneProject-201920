@@ -190,7 +190,7 @@ class DriveSystem(object):
         Assumes that it senses an object when it starts.
         """
         print(self.sensor_system.ir_proximity_sensor.get_distance_in_inches())
-        if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() > inches:
+        if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() < inches:
          self.go(-speed , -speed)
          while True:
              if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() > inches:
