@@ -189,11 +189,13 @@ class DriveSystem(object):
         the given number of inches from the nearest object that it senses.
         Assumes that it senses an object when it starts.
         """
-        self.go(-speed , -speed)
-        while True:
-            if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() > inches:
+        print(self.sensor_system.ir_proximity_sensor.get_distance_in_inches())
+        if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() < inches:
+         self.go(-speed , -speed)
+         while True:
+             if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() > inches:
                 break
-        self.stop()
+         self.stop()
 
 
     def go_until_distance_is_within(self, delta, inches, speed):
@@ -593,8 +595,10 @@ class InfraredProximitySensor(object):
         in inches, where about 39.37 inches (which is 100 cm) means no object
         is within its field of vision.
         """
-        inches_per_cm = 2.54
-        return 48 * inches_per_cm * self.get_distance() / 100
+        cm_per_inch = 2.54
+        distance = 48 / cm_per_inch * self.get_distance() / 100
+        print(distance)
+        return distance
 
 
 ###############################################################################
