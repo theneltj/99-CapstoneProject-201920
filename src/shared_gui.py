@@ -171,6 +171,7 @@ def get_drive_system_frame(window, mqtt_sender):
 
     C_spin_button=ttk.Button(frame,text="Spin While Looking")
     CC_spin_button=ttk.Button(frame,text="Spin CC While Looking")
+    Object_Info_button=ttk.Button(frame,text="Object Info")
     spin_entry=ttk.Entry(frame, width="8")
     spin_label=ttk.Label(frame,text="Spin Speed")
     area_label=ttk.Label(frame,text="Item Area")
@@ -182,9 +183,11 @@ def get_drive_system_frame(window, mqtt_sender):
     spin_entry.grid(row=4,column=3)
     area_label.grid(row=5,column=3)
     area_entry.grid(row=6,column=3)
+    Object_Info_button.grid(row=6,column=3)
 
     C_spin_button["command"]=lambda: handle_C_Spin(spin_entry,area_entry,mqtt_sender)
     CC_spin_button["command"]=lambda: handle_CC_Spin(spin_entry,area_entry,mqtt_sender)
+    Object_Info_button["command"]=lambda: handle_Object_Info_Button(mqtt_sender)
     return frame
 
 def get_arm_frame(window, mqtt_sender):
@@ -491,3 +494,9 @@ def handle_C_Spin(speed,area,mqtt_sender):
 def handle_CC_Spin(speed,area,mqtt_sender):
     print('Spin CC While Looking for Object')
     mqtt_sender.send_message('Spin_CC_While_Looking', [int(speed.get()), int(area.get())])
+
+
+def handle_Object_Info_Button(mqtt_sender):
+    print('Getting Info')
+    mqtt_sender.send_message('Display_Info')
+
