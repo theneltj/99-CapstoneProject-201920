@@ -171,6 +171,7 @@ def get_drive_system_frame(window, mqtt_sender):
 
     C_spin_button=ttk.Button(frame,text="Spin While Looking")
     CC_spin_button=ttk.Button(frame,text="Spin CC While Looking")
+    Object_Info_button=ttk.Button(frame,text="Object Info")
     spin_entry=ttk.Entry(frame, width="8")
     spin_label=ttk.Label(frame,text="Spin Speed")
     area_label=ttk.Label(frame,text="Item Area")
@@ -182,9 +183,11 @@ def get_drive_system_frame(window, mqtt_sender):
     spin_entry.grid(row=4,column=3)
     area_label.grid(row=5,column=3)
     area_entry.grid(row=6,column=3)
+    Object_Info_button.grid(row=6,column=3)
 
     C_spin_button["command"]=lambda: handle_C_Spin(spin_entry,area_entry,mqtt_sender)
     CC_spin_button["command"]=lambda: handle_CC_Spin(spin_entry,area_entry,mqtt_sender)
+    Object_Info_button["command"]=lambda: handle_Object_Info_Button(mqtt_sender)
     return frame
 
 def get_arm_frame(window, mqtt_sender):
@@ -470,24 +473,28 @@ def handle_straight_for_inches_using_encoder(distance_entry, speed_entry, mqtt_s
 
 def handle_straight_until_color_is(color_entry, speed_entry, mqtt_sender):
     print('Straight until color is')
-    mqtt_sender.send_message('straight_until_color_is', [int(color_entry.get()), int(speed_entry.get())])
+    mqtt_sender.send_message('straight_until_color_is', [str(int(color_entry.get())), str(int(speed_entry.get()))])
 
 def handle_straight_until_color_is_not(color_entry, speed_entry, mqtt_sender):
     print('Straight until color is not')
-    mqtt_sender.send_message('straight_until_color_is_not', [(int(color_entry.get())), int(speed_entry.get())])
+    mqtt_sender.send_message('straight_until_color_is_not', [str(int(color_entry.get())), str(int(speed_entry.get()))])
 
 def handle_straight_while_intensity_less_than(intensity_entry, speed_entry, mqtt_sender):
     print('Straight while intensity is less')
-    mqtt_sender.send_message('straight_while_intensity_less_than', [int(intensity_entry.get()), int(speed_entry.get())])
+    mqtt_sender.send_message('straight_while_intensity_less_than', [str(int(intensity_entry.get())), str(int(speed_entry.get()))])
 
 def handle_straight_while_intensity_greater_than(intensity_entry, speed_entry, mqtt_sender):
     print('Straight while intensity is greater')
-    mqtt_sender.send_message('straight_while_intensity_greater_than', [int(intensity_entry.get()), int(speed_entry.get())])
+    mqtt_sender.send_message('straight_while_intensity_less_than', [str(int(intensity_entry.get())), str(int(speed_entry.get()))])
 
 def handle_C_Spin(speed,area,mqtt_sender):
     print('Spin While Looking for Object')
-    mqtt_sender.send_message('Spin_C_While_Looking',[int(speed.get()), int(area.get())])
+    mqtt_sender.send_message('Spin_C_While_Looking',[speed.get(),area.get()])
 
 def handle_CC_Spin(speed,area,mqtt_sender):
     print('Spin CC While Looking for Object')
-    mqtt_sender.send_message('Spin_CC_While_Looking', [int(speed.get()), int(area.get())])
+    mqtt_sender.send_message('Spin_CC_While_Looking', [speed.get(), area.get()])
+
+def handle_Object_Info_Button(mqtt_sender):
+    print('Getting Info')
+    mqtt_sender.send_message('Display_Info')
