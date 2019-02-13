@@ -458,8 +458,8 @@ def handle_straight_until_color_is_not(color_entry, speed_entry, mqtt_sender):
 
 def handle_straight_while_intensity_less_than(intensity_entry, speed_entry, mqtt_sender):
     print('Straight while intensity is less')
-    mqtt_sender.send_message('straight_while_intensity_less_than', [str(int(intensity_entry.get())), str(int(speed_entry.get()))])
+    mqtt_sender.send_message('straight_while_intensity_less_than', [int(intensity_entry.get()), int(speed_entry.get())])
 
 def handle_straight_while_intensity_greater_than(intensity_entry, speed_entry, mqtt_sender):
     print('Straight while intensity is greater')
-    mqtt_sender.send_message('straight_while_intensity_less_than', [str(int(intensity_entry.get())), str(int(speed_entry.get()))])
+    mqtt_sender.send_message('straight_while_intensity_less_than', [int(intensity_entry.get()), int(speed_entry.get())])

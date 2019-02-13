@@ -19,8 +19,7 @@ def main():
     """
     robot = rosebot.RoseBot()
     robot.sound_system.beeper.beep()
-    robot.drive_system.go_straight_until_intensity_is_greater_than(60, 50)
-    # real_thing()
+    real_thing()
 
 def real_thing():
     robot = rosebot.RoseBot()
