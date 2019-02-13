@@ -176,12 +176,12 @@ def get_drive_system_frame(window, mqtt_sender):
     area_label=ttk.Label(frame,text="Item Area")
     area_entry=ttk.Entry(frame,width="8")
 
-    C_spin_button.grid(row=0,column=3)
-    CC_spin_button.grid(row=1,column=3)
-    spin_label.grid(row=2,column=3)
-    spin_entry.grid(row=3,column=3)
-    area_label.grid(row=4,column=3)
-    area_entry.grid(row=5,column=3)
+    C_spin_button.grid(row=1,column=3)
+    CC_spin_button.grid(row=2,column=3)
+    spin_label.grid(row=3,column=3)
+    spin_entry.grid(row=4,column=3)
+    area_label.grid(row=5,column=3)
+    area_entry.grid(row=6,column=3)
 
     C_spin_button["command"]=lambda: handle_C_Spin(spin_entry,area_entry,mqtt_sender)
     CC_spin_button["command"]=lambda: handle_CC_Spin(spin_entry,area_entry,mqtt_sender)
