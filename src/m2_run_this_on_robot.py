@@ -17,8 +17,9 @@ def main():
     # robot.arm_and_claw.calibrate_arm()
     # robot.arm_and_claw.move_arm_to_position(180*14.2)
     # robot.arm_and_claw.lower_arm()
-    # robot.sound_system.beeper.beep()
-    robot.drive_system.go_backward_until_distance_is_greater_than(24, 20)
+    robot.sound_system.beeper.beep()
+    robot.drive_system.go_backward_until_distance_is_greater_than(30, 20)
+    robot.sound_system.beeper.beep()
 
 
 
