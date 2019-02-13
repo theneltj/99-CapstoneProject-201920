@@ -127,39 +127,43 @@ def get_drive_system_frame(window, mqtt_sender):
     color_6_label = ttk.Label(frame, text="6-White")
     color_7_label = ttk.Label(frame, text="7-Brown")
 
-    color_label.grid(row=4, column=0)
-    color_0_label.grid(row=4, column=1)
-    color_1_label.grid(row=4, column=2)
-    color_2_label.grid(row=5, column=0)
-    color_3_label.grid(row=5, column=1)
-    color_4_label.grid(row=5, column=2)
-    color_5_label.grid(row=6, column=0)
-    color_6_label.grid(row=6, column=1)
-    color_7_label.grid(row=6, column=2)
+    color_label.grid(row=10, column=0)
+    color_0_label.grid(row=10, column=1)
+    color_1_label.grid(row=10, column=2)
+    color_2_label.grid(row=11, column=0)
+    color_3_label.grid(row=11, column=1)
+    color_4_label.grid(row=11, column=2)
+    color_5_label.grid(row=12, column=0)
+    color_6_label.grid(row=12, column=1)
+    color_7_label.grid(row=12, column=2)
 
     color_is_button = ttk.Button(frame, text="Straight while on color:")
     color_is_not_button = ttk.Button(frame, text="Straight while not on color:")
     color_entry = ttk.Entry(frame, width=8)
-    color_is_button.grid(row=7, column=0)
-    color_is_not_button.grid(row=7, column=1)
-    color_entry.grid(row=7, column=2)
+    color_is_button.grid(row=5, column=0)
+    color_is_not_button.grid(row=5, column=1)
+    color_entry.grid(row=5, column=2)
+    color_entry_label = ttk.Label(frame, text="Color:")
+    color_entry_label.grid(row=4,column=2)
 
     intensity_less_than_button = ttk.Button(frame, text="Straight with Intensity less than:")
     intensity_greater_than_button = ttk.Button(frame, text="Straight with Intensity greater than:")
     intensity_entry = ttk.Entry(frame, width=8)
-    intensity_less_than_button.grid(row=8, column=0)
-    intensity_greater_than_button.grid(row=8, column=1)
-    intensity_entry.grid(row=8, column=2)
+    intensity_less_than_button.grid(row=7, column=0)
+    intensity_greater_than_button.grid(row=7, column=1)
+    intensity_entry.grid(row=7, column=2)
+    intensity_entry_label = ttk.Label(frame, text="Intensity:")
+    intensity_entry_label.grid(row=6, column=2)
 
     # Set the button callbacks:
     seconds_button["command"] = lambda: handle_straight_for_seconds(seconds_entry, speed_entry, mqtt_sender)
     inches_time_button["command"] = lambda: handle_straight_for_inches_using_time(distance_entry, speed_entry, mqtt_sender)
     inches_encoder_button["command"] = lambda: handle_straight_for_inches_using_encoder(distance_entry, speed_entry, mqtt_sender)
 
-    color_is_button["command"] = lambda: handle_straight_while_color_is(color_entry, mqtt_sender)
-    color_is_not_button["command"] = lambda: handle_straight_while_color_is_not(color_entry, mqtt_sender)
-    intensity_less_than_button["command"] = lambda: handle_straight_while_intensity_less_than(intensity_entry, mqtt_sender)
-    intensity_greater_than_button["command"] = lambda: handle_straight_while_intensity_greater_than(intensity_entry, mqtt_sender)
+    color_is_button["command"] = lambda: handle_straight_until_color_is(color_entry, speed_entry, mqtt_sender)
+    color_is_not_button["command"] = lambda: handle_straight_until_color_is_not(color_entry, speed_entry, mqtt_sender)
+    intensity_less_than_button["command"] = lambda: handle_straight_while_intensity_less_than(intensity_entry, speed_entry, mqtt_sender)
+    intensity_greater_than_button["command"] = lambda: handle_straight_while_intensity_greater_than(intensity_entry, speed_entry, mqtt_sender)
 
     return frame
 
@@ -443,18 +447,18 @@ def handle_straight_for_inches_using_encoder(distance_entry, speed_entry, mqtt_s
     mqtt_sender.send_message('straight_for_inches_using_encoder',
                              [str(int(distance_entry.get())), str(int(speed_entry.get()))])
 
-def handle_straight_while_color_is(color_entry, mqtt_sender):
-    print('Straight while color is')
-    mqtt_sender.send_message('speaker', [str(int(color_entry.get()))])
+def handle_straight_until_color_is(color_entry, speed_entry, mqtt_sender):
+    print('Straight until color is')
+    mqtt_sender.send_message('straight_until_color_is', [str(int(color_entry.get())), str(int(speed_entry.get()))])
 
-def handle_straight_while_color_is_not(color_entry, mqtt_sender):
-    print('Straight while color is not')
-    mqtt_sender.send_message('speaker', [str(int(color_entry.get()))])
+def handle_straight_until_color_is_not(color_entry, speed_entry, mqtt_sender):
+    print('Straight until color is not')
+    mqtt_sender.send_message('straight_until_color_is_not', [str(int(color_entry.get())), str(int(speed_entry.get()))])
 
-def handle_straight_while_intensity_less_than(intensity_entry, mqtt_sender):
+def handle_straight_while_intensity_less_than(intensity_entry, speed_entry, mqtt_sender):
     print('Straight while intensity is less')
-    mqtt_sender.send_message('speaker', [str(int(intensity_entry.get()))])
+    mqtt_sender.send_message('straight_while_intensity_less_than', [str(int(intensity_entry.get())), str(int(speed_entry.get()))])
 
-def handle_straight_while_intensity_greater_than(intensity_entry, mqtt_sender):
+def handle_straight_while_intensity_greater_than(intensity_entry, speed_entry, mqtt_sender):
     print('Straight while intensity is greater')
-    mqtt_sender.send_message('speaker', [str(int(intensity_entry.get()))])
+    mqtt_sender.send_message('straight_while_intensity_less_than', [str(int(intensity_entry.get())), str(int(speed_entry.get()))])
