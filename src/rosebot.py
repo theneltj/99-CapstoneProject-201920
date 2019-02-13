@@ -125,12 +125,20 @@ class DriveSystem(object):
         Goes straight at the given speed until the intensity returned
         by the color_sensor is less than the given intensity.
         """
+        self.go(speed, speed)
+        while self.sensor_system.color_sensor.get_ambient_light_intensity() < intensity:
+            pass
+        self.stop()
 
     def go_straight_until_intensity_is_greater_than(self, intensity, speed):
         """
         Goes straight at the given speed until the intensity returned
         by the color_sensor is greater than the given intensity.
         """
+        self.go(speed, speed)
+        while self.sensor_system.color_sensor.get_ambient_light_intensity() > intensity:
+            pass
+        self.stop()
 
     def go_straight_until_color_is(self, color, speed):
         """
@@ -145,6 +153,12 @@ class DriveSystem(object):
         then use the   get_color_as_name   method to access
         the color sensor's color.
         """
+        self.go(speed, speed)
+        if type(color) == str:
+            color = self.sensor_system.color_sensor.get_color_number_from_color_name(color)
+        while self.sensor_system.color_sensor.get_color() != color:
+            pass
+        self.stop()
 
     def go_straight_until_color_is_not(self, color, speed):
         """
@@ -153,13 +167,19 @@ class DriveSystem(object):
 
         Colors can be integers from 0 to 7 or any of the strings
         listed in the ColorSensor class.
-
+        """
+        self.go(speed, speed)
+        if type(color) == str:
+            color = self.sensor_system.color_sensor.get_color_number_from_color_name(color)
+        while self.sensor_system.color_sensor.get_color() != color:
+            pass
+        self.stop()
+        
     # -------------------------------------------------------------------------
     # Methods for driving that use the infrared proximity sensor.
     # -------------------------------------------------------------------------
     def go_forward_until_distance_is_less_than(self, inches, speed):
-        ""
-        Goes forward at the given speed until the robot is less than
+        """Goes forward at the given speed until the robot is less than
         the given number of inches from the nearest object that it senses.
         """
         
