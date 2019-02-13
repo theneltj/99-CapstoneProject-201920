@@ -28,8 +28,8 @@ def main():
 
     #real_thing()
     #run_test_get_blob_data()
-    #run_test_turn_C(100,3000)
-    run_test_turn_CC(50,3000)
+    run_test_turn_C(50,3000)
+    #run_test_turn_CC(50,3000)
 
 
 def run_test_arm():
