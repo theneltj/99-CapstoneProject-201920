@@ -73,3 +73,9 @@ class ResponderToGUIMessages(object):
 
     def straight_while_intensity_greater_than(self, intensity, speed):
         self.robot.drive_system.go_straight_until_intensity_is_greater_than(intensity, speed)
+
+    def Spin_C_While_Looking(self,speed,area):
+        self.robot.drive_system.spin_clockwise_until_sees_object(speed,area)
+
+    def Spin_CC_While_Looking(self,speed,area):
+        self.robot.drive_system.spin_counterclockwise_until_sees_object(speed,area)
