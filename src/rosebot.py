@@ -191,9 +191,9 @@ class DriveSystem(object):
         #         break
         # self.stop()
         average_distance = self.average_distance_from()
-        if average_distance > inches:
-            difference = average_distance - inches
-            self.go_straight_for_inches_using_time(-difference, -speed)
+        if average_distance < inches:
+            difference = inches - average_distance
+            self.go_straight_for_inches_using_time(difference, speed)
         
     def go_backward_until_distance_is_greater_than(self, inches, speed):
         """
