@@ -18,8 +18,10 @@ def main():
       2. Communicates via MQTT with the GUI code that runs on the LAPTOP.
     """
     robot = rosebot.RoseBot()
-    robot.sound_system.beeper.beep()
+    robot.sound_system.tone_maker.play_tone(100, 300)
+    time.sleep(0.5)
     real_thing()
+
 
 def real_thing():
     robot = rosebot.RoseBot()
@@ -31,6 +33,7 @@ def real_thing():
         if delegate.stop_program == True:
             break
         time.sleep(0.01)
+
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
 # -----------------------------------------------------------------------------
