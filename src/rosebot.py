@@ -313,7 +313,7 @@ class DriveSystem(object):
         while self.sensor_system.camera.get_biggest_blob().get_area()<area:
             self.go(speed,-speed)
         self.stop()
-        #self.fine_tune_position()
+        self.fine_tune_position()
 
 
     def spin_counterclockwise_until_sees_object(self, speed, area):
@@ -325,12 +325,13 @@ class DriveSystem(object):
         while self.sensor_system.camera.get_biggest_blob().get_area()<area:
             self.go(-speed,speed)
         self.stop()
+        self.fine_tune_position()
 
     def fine_tune_position(self):
         while True:
-            if self.sensor_system.camera.get_biggest_blob().center.x<self.sensor_system.camera.get_biggest_blob().screen_limits.x/2:
+            if self.sensor_system.camera.get_biggest_blob().center.x<(self.sensor_system.camera.get_biggest_blob().screen_limits.x/2)-10:
                 self.go(20,-20)
-            elif self.sensor_system.camera.get_biggest_blob().center.x>self.sensor_system.camera.get_biggest_blob().screen_limits.x/2:
+            elif self.sensor_system.camera.get_biggest_blob().center.x>(self.sensor_system.camera.get_biggest_blob().screen_limits.x/2)+10:
                 self.go(-20,20)
             else:
                 break
