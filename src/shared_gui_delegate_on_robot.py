@@ -97,7 +97,7 @@ class ResponderToGUIMessages(object):
 
     def Flashy_Pickup(self,speed,increase):
         self.robot.drive_system.go(50,50)
-        time_on=speed
+        time_on=float(speed)
         while self.robot.sensor_system.ir_proximity_sensor.get_distance_in_inches()>1.5:
             self.robot.led_system.left_led.turn_on()
             time.sleep(float(time_on))
@@ -109,7 +109,8 @@ class ResponderToGUIMessages(object):
             self.robot.led_system.left_led.turn_off()
             self.robot.led_system.right_led.turn_off()
             time.sleep(float(time_on))
-            time_on=time_on-increase
+            time_on=time_on-float(increase)
             if time_on<0.1:
                 time_on=0.1
         self.robot.drive_system.stop()
+        self.robot.arm_and_claw.raise_arm()
