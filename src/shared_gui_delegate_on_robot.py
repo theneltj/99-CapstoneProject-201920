@@ -84,6 +84,15 @@ class ResponderToGUIMessages(object):
     def Display_Info(self):
         self.robot.drive_system.display_camera_data()
 
+    def go_forward_until_distance_is_less_than(self, inches, speed):
+        self.robot.drive_system.go_forward_until_distance_is_less_than(inches, speed)
+
+    def go_backward_until_distance_is_greater_than(self, inches, speed):
+        self.robot.drive_system.go_backward_until_distance_is_greater_than(inches, speed)
+
+    def go_until_distance_is_within(self, delta, inches, speed):
+        self.robot.drive_system.go_until_distance_is_within(self, delta, inches, speed)
+
     #Feature 9 Person 3
 
     def Flashy_Pickup(self,speed,increase):
