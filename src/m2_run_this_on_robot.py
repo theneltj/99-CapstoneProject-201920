@@ -18,8 +18,6 @@ def main():
     # robot.arm_and_claw.move_arm_to_position(180*14.2)
     # robot.arm_and_claw.lower_arm()
     robot.sound_system.beeper.beep()
-    for k in range(100):
-        print(robot.sensor_system.ir_proximity_sensor.get_distance())
     # robot.drive_system.go_backward_until_distance_is_greater_than(5, 50)
     robot.sound_system.beeper.beep()
 
