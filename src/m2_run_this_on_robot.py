@@ -19,6 +19,7 @@ def main():
     # robot.arm_and_claw.lower_arm()
     robot.sound_system.beeper.beep()
     # robot.drive_system.go_backward_until_distance_is_greater_than(5, 50)
+    robot.drive_system.go_straight_for_inches_using_time(10, 50)
     robot.sound_system.beeper.beep()
 
 
