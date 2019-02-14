@@ -182,12 +182,20 @@ class DriveSystem(object):
         """Goes forward at the given speed until the robot is less than
         the given number of inches from the nearest object that it senses.
         """
+        # print(self.sensor_system.ir_proximity_sensor.get_distance_in_inches())
+        # if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() > inches:
+        #     self.go(speed, speed)
+        #     while True:
+        #         if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() <= inches:
+        #             break
+        # self.stop()
+        which_function = 'forward'
+        self.go(speed, speed)
         print(self.sensor_system.ir_proximity_sensor.get_distance_in_inches())
-        if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() > inches:
-            self.go(speed, speed)
-            while True:
-                if self.sensor_system.ir_proximity_sensor.get_distance_in_inches() <= inches:
-                    break
+        while True:
+            if self.for_sure(inches, which_function) != False:
+                print('Completed!')
+                break
         self.stop()
         
     def go_backward_until_distance_is_greater_than(self, inches, speed):
@@ -197,15 +205,34 @@ class DriveSystem(object):
         Assumes that it senses an object when it starts.
         """
         self.go(-speed, -speed)
+        which_function = 'backwards'
         print(self.sensor_system.ir_proximity_sensor.get_distance_in_inches())
         while True:
-                if self.for_sure(inches) != False:
+                if self.for_sure(inches, which_function) != False:
                     print('Completed!')
                     break
         self.stop()
 
 
     def go_until_distance_is_within(self, delta, inches, speed):
+        if inches > self.sensor_system.ir_proximity_sensor.get_distance_in_inches():
+            self.go(speed, speed)
+            which_function = 'forward'
+            print(self.sensor_system.ir_proximity_sensor.get_distance_in_inches())
+            while True:
+                    if self.for_sure(inches, which_function) != False:
+                        print('Completed')
+                        break
+        elif inches < self.sensor_system.ir_proximity_sensor.get_distance_in_inches():
+            self.go(-speed, -speed)
+            which_function = 'backwards'
+            print(self.sensor_system.ir_proximity_sensor.get_distance_in_inches())
+            while True:
+                if self.for_sure(inches, which_function) != False:
+                    print('Completed')
+                    break
+        self.stop()
+
         """
         Goes forward or backward, repeated as necessary, until the robot is
         within the given delta of the given inches from the nearest object
@@ -216,17 +243,25 @@ class DriveSystem(object):
         from the object.
         """
 
-    def for_sure(self, inches):
+    def for_sure(self, inches, direction):
         print(self.sensor_system.ir_proximity_sensor.get_distance_in_inches())
         temp_array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         for k in range(len(temp_array)):
             temp_array[k] = self.sensor_system.ir_proximity_sensor.get_distance_in_inches()
         print(temp_array)
-        for k in range(len(temp_array)):
-            if temp_array[k] >= inches:
-                pass
-            else:
-                return False
+        if direction == 'backwards':
+            for k in range(len(temp_array)):
+                if temp_array[k] >= inches:
+                    pass
+                else:
+                    return False
+        if direction == 'forwards':
+            for k in range(len(temp_array)):
+                if temp_array[k] <= inches:
+                    pass
+                else:
+                    return False
+
 
 
 
