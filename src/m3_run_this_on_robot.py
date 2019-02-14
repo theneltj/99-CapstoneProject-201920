@@ -26,9 +26,9 @@ def main():
     #run_test_move_arm(2000)
     #run_test_move_arm(0)
 
-    #real_thing()
+    real_thing()
     #run_test_get_blob_data()
-    run_test_turn_C(50,3000)
+    #run_test_turn_C(50,3000)
     #run_test_turn_CC(50,3000)
 
 
