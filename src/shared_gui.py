@@ -500,3 +500,4 @@ def handle_Object_Info_Button(mqtt_sender):
     print('Getting Info')
     mqtt_sender.send_message('Display_Info')
 
+

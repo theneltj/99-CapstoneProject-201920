@@ -215,6 +215,7 @@ class DriveSystem(object):
         if inches > self.sensor_system.ir_proximity_sensor.get_distance_in_inches():
             self.go(speed, speed)
             which_function = 'forward'
+            inches = inches - delta
             print(self.sensor_system.ir_proximity_sensor.get_distance_in_inches())
             while True:
                     if self.for_sure(inches, which_function) != False:
@@ -223,6 +224,7 @@ class DriveSystem(object):
         elif inches < self.sensor_system.ir_proximity_sensor.get_distance_in_inches():
             self.go(-speed, -speed)
             which_function = 'backwards'
+            inches = inches + delta
             print(self.sensor_system.ir_proximity_sensor.get_distance_in_inches())
             while True:
                 if self.for_sure(inches, which_function) != False:
