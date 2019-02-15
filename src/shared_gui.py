@@ -190,6 +190,30 @@ def get_drive_system_frame(window, mqtt_sender):
     Object_Info_button["command"]=lambda: handle_Object_Info_Button(mqtt_sender)
     return frame
 
+def get_my_m1_frame(window, mqtt_sender):
+    frame = ttk.Frame(window, padding=10, borderwidth=5, relief="ridge")
+    frame.grid()
+
+    forward_grab_button = ttk.Button(frame, text="Forward Grab")
+    spin_forward_grab_button = ttk.Button(frame, text="Spin Forward Grab")
+    forward_grab_button.grid(row=0, column=0)
+    spin_forward_grab_button.grid(row=0, column=1)
+
+    speed_entry = ttk.Entry(frame)
+    speed_label = ttk.Label(frame, text="Speed:")
+    cw_entry = ttk.Entry(frame)
+    cw_label = ttk.Label(frame, text="CW/CCW")
+
+    speed_label.grid(row=1, column=0)
+    cw_label.grid(row=1, column=1)
+    speed_entry.grid(row=2, column=0)
+    cw_entry.grid(row=2, column=1)
+
+    forward_grab_button["command"] = lambda: handle_forward_grab(speed_entry, mqtt_sender)
+    spin_forward_grab_button["command"] = lambda: handle_spin_forward_grab(speed_entry, cw_entry, mqtt_sender)
+
+    return  frame
+
 def get_arm_frame(window, mqtt_sender):
     """
     Constructs and returns a frame on the given window, where the frame
@@ -495,10 +519,14 @@ def handle_CC_Spin(speed,area,mqtt_sender):
     print('Spin CC While Looking for Object')
     mqtt_sender.send_message('Spin_CC_While_Looking', [int(speed.get()), int(area.get())])
 
-
 def handle_Object_Info_Button(mqtt_sender):
     print('Getting Info')
     mqtt_sender.send_message('Display_Info')
 
+def handle_forward_grab(speed_entry, mqtt_sender):
+    print('Forward Grab')
+    mqtt_sender.send_message('forward_grab', [int(speed_entry.get())])
 
-
+def handle_spin_forward_grab(speed_entry, cw_entry, mqtt_sender):
+    print('Spin Forward Grab')
+    mqtt_sender.send_message('spin_forward_grab', [int(speed_entry.get()), str(cw_entry.get())])
