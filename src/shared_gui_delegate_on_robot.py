@@ -130,7 +130,7 @@ class ResponderToGUIMessages(object):
             self.robot.drive_system.spin_counterclockwise_until_sees_object(speed, 200)
         self.forward_grab(speed)
 
-    def increased_pitch_pickup(self, speed):
+    def increasing_pitch_pickup(self, speed):
         self.robot.drive_system(speed, speed)
         while self.robot.sensor_system.ir_proximity_sensor.get_distance() > 3:
             self.robot.sound_system.tone_maker.play_tone((100 - self.robot.sensor_system.ir_proximity_sensor.get_distance())* 8, 250)
@@ -138,7 +138,7 @@ class ResponderToGUIMessages(object):
         self.robot.drive_system.stop()
         self.robot.arm_and_claw.raise_arm()
 
-    def spin_increased_pitch_pickup(self, speed, direction):
+    def spin_increasing_pitch_pickup(self, speed, direction):
         if direction == 'CW':
             self.robot.drive_system.spin_clockwise_until_sees_object(speed, 200)
         if direction == 'CCW':
