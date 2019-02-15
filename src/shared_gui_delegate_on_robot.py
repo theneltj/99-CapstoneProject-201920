@@ -143,4 +143,4 @@ class ResponderToGUIMessages(object):
             self.robot.drive_system.spin_clockwise_until_sees_object(speed, 200)
         if direction == 'CCW':
             self.robot.drive_system.spin_counterclockwise_until_sees_object(speed, 200)
-        self.increased_pitch_pickup(speed)
+        self.increasing_pitch_pickup(speed)
