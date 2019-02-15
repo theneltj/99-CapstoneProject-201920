@@ -131,7 +131,7 @@ class ResponderToGUIMessages(object):
         self.forward_grab(speed)
 
     def increasing_pitch_pickup(self, speed):
-        self.robot.drive_system(speed, speed)
+        self.robot.drive_system.go(speed, speed)
         while self.robot.sensor_system.ir_proximity_sensor.get_distance() > 3:
             self.robot.sound_system.tone_maker.play_tone((100 - self.robot.sensor_system.ir_proximity_sensor.get_distance())* 8, 250)
             time.sleep(.5)

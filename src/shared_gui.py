@@ -560,4 +560,4 @@ def handle_increasing_pitch_pickup(speed_entry, mqtt_sender):
 
 def handle_spin_increasing_pitch_pickup(speed_entry, cw_entry, mqtt_sender):
     print('Spin Increasing Pitch Pickup')
-    mqtt_sender.send_message('spin_increasing_pitch_pickup'), [int(speed_entry.get()), str(cw_entry.get())]
+    mqtt_sender.send_message('spin_increasing_pitch_pickup', [int(speed_entry.get()), str(cw_entry.get())])
