@@ -18,9 +18,14 @@ def main():
     # robot.arm_and_claw.move_arm_to_position(180*14.2)
     # robot.arm_and_claw.lower_arm()
     robot.sound_system.beeper.beep()
-    # robot.drive_system.go_backward_until_distance_is_greater_than(5, 50)
-    robot.drive_system.go_straight_for_inches_using_time(5, 50)
-    robot.sound_system.beeper.beep()
+    def increased_pitch_pickup(robot, speed):
+        robot.drive_system(speed, speed)
+        while robot.sensor_system.ir_proximity_sensor.get_distance() > 3:
+            robot.sound_system.tone_maker.play_tone((1/robot.sensor_system.ir_proximity_sensor.get_distance())* 40)
+            time.sleep(robot.sensor_system.ir_proximity_sensor.get_distance()/100)
+        robot.drive_system.stop()
+        robot.arm_and_claw.raise_arm()
+    increased_pitch_pickup(robot, 40)
 
 
 

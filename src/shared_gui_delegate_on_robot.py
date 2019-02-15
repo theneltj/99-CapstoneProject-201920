@@ -129,3 +129,11 @@ class ResponderToGUIMessages(object):
         if direction == 'CCW':
             self.robot.drive_system.spin_counterclockwise_until_sees_object(speed, 200)
         self.forward_grab(speed)
+
+    def increased_pitch_pickup(self, speed):
+        self.robot.drive_system(speed, speed)
+        while self.robot.sensor_system.ir_proximity_sensor.get_distance() > 3:
+            self.robot.sound_system.tone_maker.play_tone((1/self.robot.sensor_system.ir_proximity_sensor.get_distance())* 40)
+            time.sleep(self.robot.sensor_system.ir_proximity_sensor.get_distance()/100)
+        self.robot.drive_system.stop()
+        self.robot.arm_and_claw.raise_arm()
