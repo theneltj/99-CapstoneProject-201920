@@ -137,3 +137,10 @@ class ResponderToGUIMessages(object):
             time.sleep(.5)
         self.robot.drive_system.stop()
         self.robot.arm_and_claw.raise_arm()
+
+    def spin_increased_pitch_pickup(self, speed, direction):
+        if direction == 'CW':
+            self.robot.drive_system.spin_clockwise_until_sees_object(speed, 200)
+        if direction == 'CCW':
+            self.robot.drive_system.spin_counterclockwise_until_sees_object(speed, 200)
+        self.increased_pitch_pickup(speed)

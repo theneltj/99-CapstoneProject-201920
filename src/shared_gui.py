@@ -217,10 +217,10 @@ def get_my_m2_frame(window, mqtt_sender):
     frame = ttk.Frame(window, padding=10, borderwidth=5, relief="ridge")
     frame.grid()
 
-    increasing_pitch_grab_button = ttk.Button(frame, text="Increasing Pitch Grab")
-    spin_forward_grab_button = ttk.Button(frame, text="Spin Forward Grab")
-    increasing_pitch_grab_button.grid(row=0, column=0)
-    spin_forward_grab_button.grid(row=0, column=1)
+    increasing_pitch_pickup_button = ttk.Button(frame, text="Increasing Pitch Pickup")
+    spin_increasing_pitch_pickup_button = ttk.Button(frame, text="Spin Increasing Pitch Pickup")
+    increasing_pitch_pickup_button.grid(row=0, column=0)
+    spin_increasing_pitch_pickup_button.grid(row=0, column=1)
 
     speed_entry = ttk.Entry(frame)
     speed_label = ttk.Label(frame, text="Speed:")
@@ -232,8 +232,10 @@ def get_my_m2_frame(window, mqtt_sender):
     speed_entry.grid(row=2, column=0)
     cw_entry.grid(row=2, column=1)
 
-    increasing_pitch_grab_button["command"] = lambda: handle_increasing_pitch_grab(speed_entry, mqtt_sender)
-    spin_forward_grab_button["command"] = lambda: handle_spin_forward_grab(speed_entry, cw_entry, mqtt_sender)
+    increasing_pitch_pickup_button["command"] = lambda: handle_increasing_pitch_pickup(speed_entry, mqtt_sender)
+    spin_increasing_pitch_pickup_button["command"] = lambda: handle_spin_increasing_pitch_pickup(speed_entry, cw_entry, mqtt_sender)
+
+    return frame
 
 def get_arm_frame(window, mqtt_sender):
     """
@@ -552,6 +554,10 @@ def handle_spin_forward_grab(speed_entry, cw_entry, mqtt_sender):
     print('Spin Forward Grab')
     mqtt_sender.send_message('spin_forward_grab', [int(speed_entry.get()), str(cw_entry.get())])
 
-def handle_increasing_pitch_grab(speed_entry, mqtt_sender):
-    print('Increasing Pitch Grab')
-    mqtt_sender.send_message('increasing_pitch_grab', [int(speed_entry.get())])
+def handle_increasing_pitch_pickup(speed_entry, mqtt_sender):
+    print('Increasing Pitch Pickup')
+    mqtt_sender.send_message('increasing_pitch_pickup', [int(speed_entry.get())])
+
+def handle_spin_increasing_pitch_pickup(speed_entry, cw_entry, mqtt_sender):
+    print('Spin Increasing Pitch Pickup')
+    mqtt_sender.send_message('spin_increaing_pitch_pickup'), [int(speed_entry.get()), str(cw_entry.get())]
