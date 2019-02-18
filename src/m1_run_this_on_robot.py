@@ -20,7 +20,14 @@ def main():
     robot = rosebot.RoseBot()
     robot.sound_system.tone_maker.play_tone(100, 300)
     time.sleep(0.5)
-    real_thing()
+    # real_thing()
+    for k in range(10):
+        print(robot.beacon_system.get_distance_to_beacon())  # int value 0 to 100 (-128 if not found)
+        # print(beacon_seeker.heading)  # int value -25 to 25 (degrees)
+        time.sleep(1)
+
+
+
 
 
 def real_thing():
