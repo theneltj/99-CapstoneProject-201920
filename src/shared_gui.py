@@ -359,6 +359,53 @@ def get_control_frame(window, mqtt_sender):
 
     return frame
 
+def get_batman_music_frame(window, mqtt_sender):
+    frame = ttk.Frame(window, padding=10, borderwidth=5, relief="ridge")
+    frame.grid()
+
+    frame_label = ttk.Label(frame, text="MUSIC")
+    frame_label.grid(row=0, column=0)
+    cartoon_theme_button = ttk.Button(frame, text="Play Cartoon Theme")
+    cartoon_theme_button.grid(row=1, column=0)
+    movie_theme_button = ttk.Button(frame, text="Play Movie Theme")
+    movie_theme_button.grid(row=2, column=0)
+
+    cartoon_theme_button['command'] = lambda: handle_play_cartoon_theme(mqtt_sender)
+    movie_theme_button['command'] = lambda: handle_play_movie_theme(mqtt_sender)
+
+    return frame
+
+def get_batman_capture_frame(window, mqtt_sender):
+    frame = ttk.Frame(window, padding=10, borderwidth=5, relief="ridge")
+    frame.grid()
+
+    frame_label = ttk.Label(frame, text="CAPTURE")
+    frame_label.grid(row=0, column=0)
+    joker_button = ttk.Button(frame, text="Joker")
+    joker_button.grid(row=1, column=0)
+    burglar_button = ttk.Button(frame, text="Burglar")
+    burglar_button.grid(row=2, column=0)
+
+    joker_button['command'] = lambda: handle_capture_joker(mqtt_sender)
+    burglar_button['command'] = lambda: handle_capture_burglar(mqtt_sender)
+
+    return frame
+
+def get_batman_save_frame(window, mqtt_sender):
+    frame = ttk.Frame(window, padding=10, borderwidth=5, relief="ridge")
+    frame.grid()
+
+    frame_label = ttk.Label(frame, text="SAVE")
+    frame_label.grid(row=0, column=0)
+    joker_button = ttk.Button(frame, text="Robin")
+    joker_button.grid(row=1, column=0)
+    burglar_button = ttk.Button(frame, text="Girl")
+    burglar_button.grid(row=2, column=0)
+
+    joker_button['command'] = lambda: handle_save_robin(mqtt_sender)
+    burglar_button['command'] = lambda: handle_save_girl(mqtt_sender)
+
+    return frame
 
 ###############################################################################
 ###############################################################################
@@ -561,3 +608,27 @@ def handle_increasing_pitch_pickup(speed_entry, mqtt_sender):
 def handle_spin_increasing_pitch_pickup(speed_entry, cw_entry, mqtt_sender):
     print('Spin Increasing Pitch Pickup')
     mqtt_sender.send_message('spin_increasing_pitch_pickup', [int(speed_entry.get()), str(cw_entry.get())])
+
+def handle_play_cartoon_theme(mqtt_sender):
+    print('Playing Cartoon Theme')
+    mqtt_sender.send_message('play_cartoon_theme')
+
+def handle_play_movie_theme(mqtt_sender):
+    print('Playing Movie Theme')
+    mqtt_sender.send_message('play_movie_theme')
+
+def handle_capture_joker(mqtt_sender):
+    print('Capturing The Joker')
+    mqtt_sender.send_message('capture_joker')
+
+def handle_capture_burglar(mqtt_sender):
+    print('Capturing Burglar')
+    mqtt_sender.send_message('capture_burglar')
+
+def handle_save_robin(mqtt_sender):
+    print('Saving Robin')
+    mqtt_sender.send_message('save_robin')
+
+def handle_save_girl(mqtt_sender):
+    print('Saving Girl')
+    mqtt_sender.send_message('save_girl')

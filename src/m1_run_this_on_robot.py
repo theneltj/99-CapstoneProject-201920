@@ -18,6 +18,7 @@ def main():
       2. Communicates via MQTT with the GUI code that runs on the LAPTOP.
     """
     robot = rosebot.RoseBot()
+    robot.sound_system.tone_maker.play_tone(100, 500)
     real_thing()
 
 def real_thing():

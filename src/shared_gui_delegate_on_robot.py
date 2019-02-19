@@ -175,7 +175,7 @@ class ResponderToGUIMessages(object):
         self.robot.sound_system.tone_maker.play_tone(466.16, 300)
         time.sleep(.3)
         self.robot.sound_system.tone_maker.play_tone(440.00, 150)
-        time.sleep(.15)
+        time.sleep(.6)
 
         self.robot.sound_system.tone_maker.play_tone(293.66, 100)
         time.sleep(.1)
@@ -189,3 +189,15 @@ class ResponderToGUIMessages(object):
         time.sleep(.3)
         self.robot.sound_system.tone_maker.play_tone(523.25, 150)
         time.sleep(.15)
+
+    def capture_joker(self):
+        pass
+
+    def capture_burglar(self):
+        pass
+
+    def save_robin(self):
+        pass
+
+    def save_girl(self):
+        pass
