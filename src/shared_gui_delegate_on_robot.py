@@ -227,11 +227,7 @@ class ResponderToGUIMessages(object):
         elif whats_around == 5:
             self.robot.drive_system.Blood()
             self.robot.arm_and_claw.raise_arm()
-            self.robot.led_system.left_led.set_color_by_name("Red")
-            self.robot.led_system.right_led.set_color_by_name("Red")
             self.robot.drive_system.Attack()
-            self.robot.led_system.left_led.turn_off()
-            self.robot.led_system.right_led.turn_off()
             self.robot.arm_and_claw.lower_arm()
 
         elif whats_around ==2:
