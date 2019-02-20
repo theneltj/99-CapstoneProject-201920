@@ -201,3 +201,12 @@ class ResponderToGUIMessages(object):
 
     def save_girl(self):
         pass
+
+
+
+
+
+    def Hunt(self):
+        pass
+    def Fire_Lazer(self):
+        pass
