@@ -219,4 +219,4 @@ class ResponderToGUIMessages(object):
 
 
     def Fire_Lazer(self):
-        pass
+        self.robot.sound_system.speech_maker.speak("PEW")
