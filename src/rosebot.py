@@ -345,7 +345,7 @@ class DriveSystem(object):
             else:
                 break
         self.stop()
-
+#Freaks out as it is on land, Goes back and forth
     def Land(self):
         self.go(-100,100)
         time.sleep(1)
@@ -353,7 +353,7 @@ class DriveSystem(object):
         self.go(100,-100)
         time.sleep(0.5)
         self.stop()
-
+#Patrols the Beach, drives back and forth in a triangular like shape
     def Beach(self):
         for _ in range(15):
             self.go_straight_for_inches_using_encoder(10,100)
@@ -363,12 +363,12 @@ class DriveSystem(object):
             self.stop()
             self.go_straight_for_inches_using_encoder(10,100)
         self.stop()
-
+#finds and goes to an object
     def Blood(self):
         self.spin_clockwise_until_sees_object(50,500)
         Distance=self.sensor_system.ir_proximity_sensor.get_distance_in_inches()
         self.go_straight_for_inches_using_encoder(Distance,80)
-
+#shakes the object
     def Attack(self):
         for _ in range(3):
             self.go(100, -100)
@@ -377,7 +377,7 @@ class DriveSystem(object):
             self.go(-100,100)
             time.sleep(1)
             self.stop()
-
+#Searches for a color on the ground stops if it does not find it.
     def Nothing(self):
         self.go(100,100)
         time.sleep(2)

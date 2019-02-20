@@ -220,6 +220,7 @@ class ResponderToGUIMessages(object):
     def say_phrase(self, phrase):
         self.robot.sound_system.speech_maker.speak(phrase)
 
+#Hunts implementing code written in rosebot
     def Hunt(self):
         whats_around=self.robot.sensor_system.color_sensor.get_color()
         if whats_around == 7:
@@ -235,7 +236,7 @@ class ResponderToGUIMessages(object):
         else:
             self.robot.drive_system.Nothing()
 
-
+#Fires the Lazer
     def Fire_Lazer(self):
         self.robot.sound_system.speech_maker.speak("PEW")
         self.robot.led_system.right_led.turn_on()
