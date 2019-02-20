@@ -220,3 +220,9 @@ class ResponderToGUIMessages(object):
 
     def Fire_Lazer(self):
         self.robot.sound_system.speech_maker.speak("PEW")
+        self.robot.led_system.right_led.turn_on()
+        self.robot.led_system.left_led.turn_on()
+        time.sleep(1)
+        self.robot.led_system.right_led.turn_off()
+        self.robot.led_system.left_led.turn_off()
+        self.robot.sound_system.speech_maker.speak("BOOM")
