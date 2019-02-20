@@ -191,19 +191,21 @@ class ResponderToGUIMessages(object):
         time.sleep(.15)
 
     def capture_joker(self):
-        pass
+        self.robot.sensor_system.camera.set_signature('SIG1')
+        self.robot.drive_system.spin_clockwise_until_sees_object(40, 300)
 
-    def capture_burglar(self):
-        pass
+    def capture_riddler(self):
+        self.robot.sensor_system.camera.set_signature('SIG2')
+        self.robot.drive_system.spin_clockwise_until_sees_object(40, 300)
 
     def save_robin(self):
-        pass
+        self.robot.sensor_system.camera.set_signature('SIG3')
+        self.robot.drive_system.spin_clockwise_until_sees_object(40, 300)
 
     def save_girl(self):
-        pass
-
-
-
+        self.robot.sound_system.beeper.beep()
+        self.robot.sensor_system.camera.set_signature('SIG4')
+        self.robot.drive_system.spin_clockwise_until_sees_object(40, 300)
 
 
     def Hunt(self):
