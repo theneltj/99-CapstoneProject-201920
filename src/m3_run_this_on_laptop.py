@@ -133,8 +133,8 @@ def handle_flashy_pickup(speed,increase,mqtt_sender):
 
 def handle_hunt(mqtt_sender):
     print('Hunting')
-    mqtt_sender.send_message("Hunt")
-    return "Hunting"
+    message=mqtt_sender.send_message("Hunt")
+    return message
 
 def handle_Lazer(mqtt_sender):
     print("Firing Lazer")
