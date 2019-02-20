@@ -194,6 +194,13 @@ class ResponderToGUIMessages(object):
         self.robot.sensor_system.camera.set_signature('SIG1')
         self.robot.drive_system.spin_clockwise_until_sees_object(30, 600)
         self.robot.drive_system.batman_acquire_target()
+        self.robot.arm_and_claw.raise_arm()
+        self.robot.drive_system.go(30, -30)
+        time.sleep(2)
+        self.robot.drive_system.go(30, 30)
+        time.sleep(2)
+        self.robot.drive_system.stop()
+        self.robot.arm_and_claw.lower_arm()
 
     def capture_riddler(self):
         self.robot.sensor_system.camera.set_signature('SIG2')

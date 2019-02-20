@@ -19,6 +19,7 @@ def main():
     """
     robot = rosebot.RoseBot()
     robot.sound_system.tone_maker.play_tone(100, 500)
+    robot.drive_system.stop()
     real_thing()
 
 def real_thing():
