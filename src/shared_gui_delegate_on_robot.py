@@ -208,5 +208,6 @@ class ResponderToGUIMessages(object):
 
     def Hunt(self):
         pass
+
     def Fire_Lazer(self):
         pass
