@@ -268,12 +268,12 @@ class DriveSystem(object):
         return average
 
     def batman_acquire_target(self):
-        self.robot.drive_system.go(30, 30)
-        while self.robot.sensor_system.ir_proximity_sensor.get_distance_in_inches() > 10:
+        self.go(30, 30)
+        while self.sensor_system.ir_proximity_sensor.get_distance_in_inches() > 10:
             pass
-        self.robot.drive_system.go_straight_for_inches_using_encoder(6.5, 30)
-        self.robot.drive_system.stop()
-        self.robot.arm_and_claw.calibrate_arm()
+        self.go_straight_for_inches_using_encoder(6.5, 30)
+        self.stop()
+
 
 
 
