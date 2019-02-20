@@ -136,12 +136,6 @@ def handle_Lazer(mqtt_sender):
     print("Firing Lazer")
     mqtt_sender.send_message("Fire_Lazer")
 
-def Handle_Label(mqtt_sender):
-    print("Changing Label")
-    return mqtt_sender.send_message("Change_Label")
-
-
-
 
 
 def get_shared_frames(main_frame, mqtt_sender):
