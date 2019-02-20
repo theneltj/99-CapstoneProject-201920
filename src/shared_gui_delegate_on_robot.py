@@ -226,6 +226,14 @@ class ResponderToGUIMessages(object):
             self.robot.drive_system.Land()
         elif whats_around == 5:
             self.robot.drive_system.Blood()
+            self.robot.arm_and_claw.raise_arm()
+            self.robot.led_system.left_led.set_color_by_name("Red")
+            self.robot.led_system.right_led.set_color_by_name("Red")
+            self.robot.drive_system.Attack()
+            self.robot.led_system.left_led.turn_off()
+            self.robot.led_system.right_led.turn_off()
+            self.robot.arm_and_claw.lower_arm()
+
         elif whats_around ==2:
             self.robot.drive_system.Beach()
         else:
@@ -240,14 +248,3 @@ class ResponderToGUIMessages(object):
         self.robot.led_system.right_led.turn_off()
         self.robot.led_system.left_led.turn_off()
         self.robot.sound_system.speech_maker.speak("BOOM")
-
-    def Change_Label(self):
-        whats_around = self.robot.sensor_system.color_sensor.get_color()
-        if whats_around == 7:
-            return "I'm on Land"
-        elif whats_around == 5:
-            return "I Smell Blood"
-        elif whats_around == 2:
-            return "I Found a Beach with Swimmers"
-        else:
-            return "There's nothing around"
