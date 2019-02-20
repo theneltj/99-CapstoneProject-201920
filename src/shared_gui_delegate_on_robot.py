@@ -207,7 +207,16 @@ class ResponderToGUIMessages(object):
 
 
     def Hunt(self):
-        pass
+        whats_around=self.robot.sensor_system.color_sensor.get_color()
+        if whats_around == 7:
+            self.robot.drive_system.Land()
+        elif whats_around == 5:
+            self.robot.drive_system.Blood()
+        elif whats_around ==2:
+            self.robot.drive_system.Beach()
+        else:
+            self.robot.drive_system.Nothing()
+
 
     def Fire_Lazer(self):
         pass
