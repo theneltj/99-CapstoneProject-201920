@@ -195,30 +195,39 @@ class ResponderToGUIMessages(object):
         self.robot.drive_system.spin_clockwise_until_sees_object(30, 600)
         self.robot.drive_system.batman_acquire_target()
         self.robot.arm_and_claw.raise_arm()
-        self.robot.drive_system.go(30, -30)
-        time.sleep(2)
-        self.robot.drive_system.go(30, 30)
-        time.sleep(2)
-        self.robot.drive_system.stop()
-        self.robot.arm_and_claw.lower_arm()
 
     def capture_riddler(self):
         self.robot.sensor_system.camera.set_signature('SIG2')
         self.robot.drive_system.spin_clockwise_until_sees_object(30, 300)
         self.robot.drive_system.batman_acquire_target()
+        self.robot.arm_and_claw.raise_arm()
 
     def save_robin(self):
         self.robot.sensor_system.camera.set_signature('SIG3')
         self.robot.drive_system.spin_clockwise_until_sees_object(30, 800)
         self.robot.drive_system.batman_acquire_target()
+        self.robot.arm_and_claw.raise_arm()
 
     def save_girl(self):
         self.robot.sensor_system.camera.set_signature('SIG4')
         self.robot.drive_system.spin_clockwise_until_sees_object(30, 600)
         self.robot.drive_system.batman_acquire_target()
+        self.robot.arm_and_claw.raise_arm()
 
     def say_phrase(self, phrase):
         self.robot.sound_system.speech_maker.speak(phrase)
+
+    def deliver(self, first_letter_of_color):
+        if first_letter_of_color == 'w':
+            color = 6
+        if first_letter_of_color == 'g':
+            color = 3
+        if first_letter_of_color == 'r':
+            color = 5
+        if first_letter_of_color == 'b':
+            color = 2
+        self.robot.drive_system.go_straight_until_color_is(color, 50)
+        self.robot.arm_and_claw.lower_arm()
 
     def Hunt(self):
         whats_around=self.robot.sensor_system.color_sensor.get_color()

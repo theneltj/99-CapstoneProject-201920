@@ -68,12 +68,16 @@ def main():
     # Grid the frames.
     # -------------------------------------------------------------------------
 
-    root.bind('<Up>', lambda event: mqtt_sender.send_message('go', [30, 30]))
+    root.bind('<Up>', lambda event: mqtt_sender.send_message('go', [100, 100]))
     root.bind('<Left>', lambda event: mqtt_sender.send_message('go', [-30, 30]))
     root.bind('<Right>', lambda event: mqtt_sender.send_message('go', [30, -30]))
     root.bind('<Down>', lambda event: mqtt_sender.send_message('go', [-30, -30]))
-    root.bind('<space>', lambda event: mqtt_sender.send_message('stop'))
+    root.bind('</>', lambda event: mqtt_sender.send_message('stop'))
 
+    root.bind('<w>', lambda event: mqtt_sender.send_message('deliver', ['w']))
+    root.bind('<g>', lambda event: mqtt_sender.send_message('deliver', ['g']))
+    root.bind('<r>', lambda event: mqtt_sender.send_message('deliver', ['r']))
+    root.bind('<b>', lambda event: mqtt_sender.send_message('deliver', ['b']))
 
     grid_frames(teleop_frame, drive_system_frame, arm_frame, sound_system_frame, control_frame, my_m1_frame)
     grid_batman_frames(batman_music_frame, batman_capture_frame, batman_save_frame, batman_catchphrase_frame)
