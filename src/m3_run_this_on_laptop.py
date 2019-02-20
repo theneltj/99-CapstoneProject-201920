@@ -12,6 +12,7 @@ import tkinter
 from tkinter import ttk
 import shared_gui
 from tkinter import *
+import time
 
 
 def main():
@@ -109,7 +110,7 @@ def main():
     Action_Label.grid(row=3,column=1)
     Distance_Label.grid(row=4, column=1)
 
-    Hunt_Button["command"]=lambda: handle_hunt(mqtt_sender)
+    Hunt_Button["command"]=lambda: (handle_hunt(mqtt_sender), Action_Label.config(text=handle_hunt(mqtt_sender)))
     Lazer_Beam_Button["command"]=lambda: (handle_Lazer(mqtt_sender), Action_Label.config(text="Lazer Fired"))
 
 
@@ -133,6 +134,7 @@ def handle_flashy_pickup(speed,increase,mqtt_sender):
 def handle_hunt(mqtt_sender):
     print('Hunting')
     mqtt_sender.send_message("Hunt")
+    return "Hunting"
 
 def handle_Lazer(mqtt_sender):
     print("Firing Lazer")
