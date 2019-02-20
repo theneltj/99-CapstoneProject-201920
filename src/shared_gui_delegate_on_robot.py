@@ -236,8 +236,8 @@ class ResponderToGUIMessages(object):
         if whats_around == 7:
             return "I'm on Land"
         elif whats_around == 5:
-            "I Smell Blood"
+            return "I Smell Blood"
         elif whats_around == 2:
-            "I Found a Beach with Swimmers"
+            return "I Found a Beach with Swimmers"
         else:
-            "There's nothing around"
+            return "There's nothing around"

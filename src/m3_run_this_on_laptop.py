@@ -110,7 +110,7 @@ def main():
     Action_Label.grid(row=3,column=1)
     Distance_Label.grid(row=4, column=1)
 
-    Hunt_Button["command"]=lambda: (handle_hunt(mqtt_sender),Action_Label.config(text=Handle_Label()))
+    Hunt_Button["command"]=lambda: (handle_hunt(mqtt_sender),Action_Label.config(text=Handle_Label(mqtt_sender)))
     Lazer_Beam_Button["command"]=lambda: (handle_Lazer(mqtt_sender), Action_Label.config(text="Lazer Fired"))
 
 
@@ -142,7 +142,7 @@ def handle_Lazer(mqtt_sender):
 
 def Handle_Label(mqtt_sender):
     print("Changing Label")
-    mqtt_sender.send_message("Change_Label")
+
 
 
 
