@@ -267,7 +267,7 @@ class DriveSystem(object):
         average = total/10
         return average
 
-    def batman_aquire_target(self):
+    def batman_acquire_target(self):
         self.robot.drive_system.go(30, 30)
         while self.robot.sensor_system.ir_proximity_sensor.get_distance_in_inches() > 10:
             pass
