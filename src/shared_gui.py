@@ -383,7 +383,7 @@ def get_batman_capture_frame(window, mqtt_sender):
     frame_label.grid(row=0, column=0)
     joker_button = ttk.Button(frame, text="Joker")
     joker_button.grid(row=1, column=0)
-    riddler_button = ttk.Button(frame, text="Burglar")
+    riddler_button = ttk.Button(frame, text="Riddler")
     riddler_button.grid(row=2, column=0)
 
     joker_button['command'] = lambda: handle_capture_joker(mqtt_sender)
@@ -622,7 +622,7 @@ def handle_capture_joker(mqtt_sender):
     mqtt_sender.send_message('capture_joker')
 
 def handle_capture_burglar(mqtt_sender):
-    print('Capturing Burglar')
+    print('Capturing The Riddler')
     mqtt_sender.send_message('capture_burglar')
 
 def handle_save_robin(mqtt_sender):
