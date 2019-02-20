@@ -346,6 +346,18 @@ class DriveSystem(object):
                 break
         self.stop()
 
+    def Land(self):
+        self.go(-100,100)
+        time.sleep(1)
+        self.stop()
+        self.go(100,-100)
+        time.sleep(0.5)
+        self.stop()
+        self.go(20,20)
+        self.sleep(0.25)
+        self.stop()
+
+
 ###############################################################################
 #    ArmAndClaw
 ###############################################################################
