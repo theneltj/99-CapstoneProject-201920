@@ -100,7 +100,7 @@ def main():
     Hunt_Button=ttk.Button(RoboShark_Frame,text="HUNT!")
     Lazer_Beam_Button=ttk.Button(RoboShark_Frame, text="FIRE LAZER!")
     Action_Label=ttk.Label(RoboShark_Frame, text="Waiting")
-    Distance_Label=ttk.Label(RoboShark_Frame,text="No Target")
+
 
 
     RoboShark_Frame.grid(row=0, column=1)
@@ -108,13 +108,10 @@ def main():
     Hunt_Button.grid(row=1,column=1)
     Lazer_Beam_Button.grid(row=2, column=1)
     Action_Label.grid(row=3,column=1)
-    Distance_Label.grid(row=4, column=1)
 
-    Hunt_Button["command"]=lambda: (handle_hunt(mqtt_sender),Action_Label.config(text=Handle_Label(mqtt_sender)))
+
+    Hunt_Button["command"]=lambda: (handle_hunt(mqtt_sender), Action_Label.config(text="Hunting"))
     Lazer_Beam_Button["command"]=lambda: (handle_Lazer(mqtt_sender), Action_Label.config(text="Lazer Fired"))
-
-
-
 
 
 
@@ -133,8 +130,7 @@ def handle_flashy_pickup(speed,increase,mqtt_sender):
 
 def handle_hunt(mqtt_sender):
     print('Hunting')
-    message=mqtt_sender.send_message("Hunt")
-    return message
+    mqtt_sender.send_message("Hunt")
 
 def handle_Lazer(mqtt_sender):
     print("Firing Lazer")
@@ -142,7 +138,7 @@ def handle_Lazer(mqtt_sender):
 
 def Handle_Label(mqtt_sender):
     print("Changing Label")
-
+    return mqtt_sender.send_message("Change_Label")
 
 
 

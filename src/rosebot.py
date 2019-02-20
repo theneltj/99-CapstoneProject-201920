@@ -345,7 +345,7 @@ class DriveSystem(object):
             else:
                 break
         self.stop()
-
+#Freaks out as it is on land, Goes back and forth
     def Land(self):
         self.go(-100,100)
         time.sleep(1)
@@ -353,9 +353,55 @@ class DriveSystem(object):
         self.go(100,-100)
         time.sleep(0.5)
         self.stop()
-        self.go(20,20)
-        self.sleep(0.25)
+#Patrols the Beach, drives back and forth in a triangular like shape
+    def Beach(self):
+        for _ in range(15):
+            self.go_straight_for_inches_using_encoder(10,100)
+            self.stop()
+            self.go(50,-50)
+            time.sleep(2)
+            self.stop()
+            self.go_straight_for_inches_using_encoder(10,100)
         self.stop()
+#finds and goes to an object
+    def Blood(self):
+        self.spin_clockwise_until_sees_object(50,500)
+        Distance=self.sensor_system.ir_proximity_sensor.get_distance_in_inches()
+        self.go_straight_for_inches_using_encoder(Distance,80)
+#shakes the object
+    def Attack(self):
+        for _ in range(3):
+            self.go(100, -100)
+            time.sleep(1)
+            self.stop()
+            self.go(-100,100)
+            time.sleep(1)
+            self.stop()
+#Searches for a color on the ground stops if it does not find it.
+    def Nothing(self):
+        self.go(100,100)
+        time.sleep(2)
+        self.stop()
+        if self.sensor_system.color_sensor.get_color() == 2:
+            self.Beach()
+        elif self.sensor_system.color_sensor.get_color() == 7:
+            self.Land()
+        elif self.sensor_system.color_sensor.get_color() == 5:
+            self.Blood()
+        else:
+            self.go(50,50)
+            time.sleep(2)
+            self.stop()
+            if self.sensor_system.color_sensor.get_color() == 2:
+                self.Beach()
+            elif self.sensor_system.color_sensor.get_color() == 7:
+                self.Land()
+            elif self.sensor_system.color_sensor.get_color() == 5:
+                self.Blood()
+            else:
+                pass
+
+
 
 
 ###############################################################################
