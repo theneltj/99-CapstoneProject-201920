@@ -623,7 +623,7 @@ def handle_capture_joker(mqtt_sender):
 
 def handle_capture_burglar(mqtt_sender):
     print('Capturing The Riddler')
-    mqtt_sender.send_message('capture_burglar')
+    mqtt_sender.send_message('capture_riddler')
 
 def handle_save_robin(mqtt_sender):
     print('Saving Robin')

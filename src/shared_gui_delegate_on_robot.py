@@ -203,7 +203,6 @@ class ResponderToGUIMessages(object):
         self.robot.drive_system.spin_clockwise_until_sees_object(40, 300)
 
     def save_girl(self):
-        self.robot.sound_system.beeper.beep()
         self.robot.sensor_system.camera.set_signature('SIG4')
         self.robot.drive_system.spin_clockwise_until_sees_object(40, 300)
 
