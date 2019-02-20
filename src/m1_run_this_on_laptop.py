@@ -58,7 +58,7 @@ def main():
     # Sub-frames for the shared GUI that the team developed:
     # -------------------------------------------------------------------------
     teleop_frame, drive_system_frame, arm_frame, sound_system_frame, control_frame, my_m1_frame = get_shared_frames(main_frame, mqtt_sender)
-    batman_music_frame, batman_capture_frame, batman_save_frame = get_batman_frames(side_frame, mqtt_sender)
+    batman_music_frame, batman_capture_frame, batman_save_frame, batman_catchphrase_frame = get_batman_frames(side_frame, mqtt_sender)
     # -------------------------------------------------------------------------
     # Frames that are particular to my individual contributions to the project.
     # -------------------------------------------------------------------------
@@ -68,7 +68,7 @@ def main():
     # Grid the frames.
     # -------------------------------------------------------------------------
     grid_frames(teleop_frame, drive_system_frame, arm_frame, sound_system_frame, control_frame, my_m1_frame)
-    grid_batman_frames(batman_music_frame, batman_capture_frame, batman_save_frame)
+    grid_batman_frames(batman_music_frame, batman_capture_frame, batman_save_frame, batman_catchphrase_frame)
     # -------------------------------------------------------------------------
     # The event loop:
     # -------------------------------------------------------------------------
@@ -97,12 +97,14 @@ def get_batman_frames(batman_main_frame, mqtt_sender):
     batman_music_frame = shared_gui.get_batman_music_frame(batman_main_frame, mqtt_sender)
     batman_capture_frame = shared_gui.get_batman_capture_frame(batman_main_frame, mqtt_sender)
     batman_save_frame = shared_gui.get_batman_save_frame(batman_main_frame, mqtt_sender)
-    return batman_music_frame, batman_capture_frame, batman_save_frame
+    batman_catchphrase_frame = shared_gui.get_batman_catchphrase_frame(batman_main_frame, mqtt_sender)
+    return batman_music_frame, batman_capture_frame, batman_save_frame, batman_catchphrase_frame
 
-def grid_batman_frames(batman_music_frame, batman_capture_frame, batman_save_frame):
+def grid_batman_frames(batman_music_frame, batman_capture_frame, batman_save_frame, batman_catchphrase_frame):
     batman_music_frame.grid(row=1, column=2)
     batman_capture_frame.grid(row=2, column=2)
     batman_save_frame.grid(row=3, column=2)
+    batman_catchphrase_frame.grid(row=4, column=2)
 
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.

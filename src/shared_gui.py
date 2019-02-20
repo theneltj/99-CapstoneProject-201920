@@ -407,6 +407,26 @@ def get_batman_save_frame(window, mqtt_sender):
 
     return frame
 
+def get_batman_catchphrase_frame(window, mqtt_sender):
+    frame = ttk.Frame(window, padding=10, borderwidth=5, relief="ridge")
+    frame.grid()
+
+    frame_label = ttk.Label(frame, text="CATCHPHRASE")
+    frame_label.grid(row=0, column=0)
+    catchphrase_button = ttk.Button(frame, text="Catchphrase!")
+    catchphrase_button.grid(row=1, column=0)
+    phrase_label = ttk.Label(frame, text='Enter your own:')
+    phrase_label.grid(row=2,column=0)
+    phrase_entry = ttk.Entry(frame, width=8)
+    phrase_entry.grid(row=3, column=0)
+    say_it_button = ttk.Button(frame, text='Say it!')
+    say_it_button.grid(row=4, column=0)
+
+    catchphrase_button['command'] = lambda: handle_phrase(mqtt_sender, 'I am the vengeance, I am the night, I am Batman')
+    say_it_button['command'] = lambda: handle_phrase(mqtt_sender, str(phrase_entry.get()))
+
+    return frame
+
 ###############################################################################
 ###############################################################################
 # The following specifies, for each Button,
@@ -632,3 +652,8 @@ def handle_save_robin(mqtt_sender):
 def handle_save_girl(mqtt_sender):
     print('Saving Girl')
     mqtt_sender.send_message('save_girl')
+
+def handle_phrase(mqtt_sender, phrase):
+    print('Saying Phrase')
+    print(phrase)
+    mqtt_sender.send_message('say_phrase', [phrase])

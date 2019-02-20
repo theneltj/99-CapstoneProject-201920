@@ -192,19 +192,22 @@ class ResponderToGUIMessages(object):
 
     def capture_joker(self):
         self.robot.sensor_system.camera.set_signature('SIG1')
-        self.robot.drive_system.spin_clockwise_until_sees_object(40, 300)
+        self.robot.drive_system.spin_clockwise_until_sees_object(30, 600)
 
     def capture_riddler(self):
         self.robot.sensor_system.camera.set_signature('SIG2')
-        self.robot.drive_system.spin_clockwise_until_sees_object(40, 300)
+        self.robot.drive_system.spin_clockwise_until_sees_object(30, 300)
 
     def save_robin(self):
         self.robot.sensor_system.camera.set_signature('SIG3')
-        self.robot.drive_system.spin_clockwise_until_sees_object(40, 300)
+        self.robot.drive_system.spin_clockwise_until_sees_object(30, 800)
 
     def save_girl(self):
         self.robot.sensor_system.camera.set_signature('SIG4')
-        self.robot.drive_system.spin_clockwise_until_sees_object(40, 300)
+        self.robot.drive_system.spin_clockwise_until_sees_object(30, 600)
+
+    def say_phrase(self, phrase):
+        self.robot.sound_system.speech_maker.speak(phrase)
 
 
     def Hunt(self):
