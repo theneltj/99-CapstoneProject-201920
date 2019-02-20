@@ -383,11 +383,11 @@ def get_batman_capture_frame(window, mqtt_sender):
     frame_label.grid(row=0, column=0)
     joker_button = ttk.Button(frame, text="Joker")
     joker_button.grid(row=1, column=0)
-    burglar_button = ttk.Button(frame, text="Burglar")
-    burglar_button.grid(row=2, column=0)
+    riddler_button = ttk.Button(frame, text="Burglar")
+    riddler_button.grid(row=2, column=0)
 
     joker_button['command'] = lambda: handle_capture_joker(mqtt_sender)
-    burglar_button['command'] = lambda: handle_capture_burglar(mqtt_sender)
+    riddler_button['command'] = lambda: handle_capture_burglar(mqtt_sender)
 
     return frame
 
@@ -397,13 +397,13 @@ def get_batman_save_frame(window, mqtt_sender):
 
     frame_label = ttk.Label(frame, text="SAVE")
     frame_label.grid(row=0, column=0)
-    joker_button = ttk.Button(frame, text="Robin")
-    joker_button.grid(row=1, column=0)
-    burglar_button = ttk.Button(frame, text="Girl")
-    burglar_button.grid(row=2, column=0)
+    robin_button = ttk.Button(frame, text="Robin")
+    robin_button.grid(row=1, column=0)
+    girl_button = ttk.Button(frame, text="Girl")
+    girl_button.grid(row=2, column=0)
 
-    joker_button['command'] = lambda: handle_save_robin(mqtt_sender)
-    burglar_button['command'] = lambda: handle_save_girl(mqtt_sender)
+    robin_button['command'] = lambda: handle_save_robin(mqtt_sender)
+    girl_button['command'] = lambda: handle_save_girl(mqtt_sender)
 
     return frame
 
