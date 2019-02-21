@@ -9,6 +9,8 @@
 
 import mqtt_remote_method_calls as com
 import tkinter
+import rosebot
+import time
 from tkinter import ttk
 import shared_gui
 
@@ -80,8 +82,109 @@ def grid_frames(teleop_frame,drive_system_frame, arm_frame, sound_system_frame, 
     my_m2_frame.grid(row=0, column=1)
 
 def zorg():
+ robot = rosebot.RoseBot()
+ old_robot_direction = 'North'
  place = 'Campground'
  action_array = [0, 0, 0, 0, 0, 0, 0, 0]
+
+ def robot_go_zorg(robot, robot_direction, old_robot_direction):
+         while True:
+             if (old_robot_direction == 'north'):
+                 if (robot_direction == 'east'):
+
+                     robot.drive_system.go(50, -50)
+                     time.sleep(2.1)
+                     robot.drive_system.stop()
+                     robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                     return ('east')
+                 elif (robot_direction == 'south'):
+                     robot.drive_system.go(50, -50)
+                     time.sleep(4.2)
+                     robot.drive_system.stop()
+                     robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                     return ('south')
+                 elif (robot_direction == 'west'):
+                     robot.drive_system.go(-50, 50)
+                     time.sleep(2.1)
+                     robot.drive_system.stop()
+                     robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                     return('west')
+                 elif (robot_direction == 'north'):
+                     robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                     return ('north')
+             elif (old_robot_direction == 'east'):
+                 robot_direction = input('new')
+                 if (robot_direction == 'east'):
+                     robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                     return ('east')
+                 elif (robot_direction == 'south'):
+                     robot.drive_system.go(50, -50)
+                     time.sleep(2.1)
+                     robot.drive_system.stop()
+                     robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                     return ('south')
+                 elif (robot_direction == 'west'):
+                     robot.drive_system.go(50, -50)
+                     time.sleep(4.2)
+                     robot.drive_system.stop()
+                     robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                     return ('west')
+                 elif (robot_direction == 'north'):
+                     robot.drive_system.go(-50, 50)
+                     time.sleep(2.1)
+                     robot.drive_system.stop()
+                     robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                     return ('north')
+             elif (old_robot_direction == 'south'):
+                 robot_direction = input('new')
+                 if (robot_direction == 'east'):
+                     robot.drive_system.go(-50, 50)
+                     time.sleep(2.1)
+                     robot.drive_system.stop()
+                     robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                     return ('east')
+                 elif (robot_direction == 'south'):
+                     return ('south')
+                 elif (robot_direction == 'west'):
+                     robot.drive_system.go(50, -50)
+                     time.sleep(2.1)
+                     robot.drive_system.stop()
+                     robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                     return ('west')
+                 elif (robot_direction == 'north'):
+                     robot.drive_system.go(50, -50)
+                     time.sleep(4.2)
+                     robot.drive_system.stop()
+                     robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                     return ('north')
+
+             elif (old_robot_direction == 'west'):
+                 robot_direction = input('new')
+                 if (robot_direction == 'east'):
+                     robot.drive_system.go(50, -50)
+                     time.sleep(4.2)
+                     robot.drive_system.stop()
+                     robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                     return ('east')
+                 elif (robot_direction == 'south'):
+                     robot.drive_system.go(-50, 50)
+                     time.sleep(2.1)
+                     robot.drive_system.stop()
+                     robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                     return ('south')
+                 elif (robot_direction == 'west'):
+                     robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                     return ('west')
+                 elif (robot_direction == 'north'):
+                     robot.drive_system.go(50, -50)
+                     time.sleep(2.1)
+                     robot.drive_system.stop()
+                     robot.drive_system.go_straight_for_inches_using_time(5,100)
+                     return ('north')
+
+
+
+
 
  def place_discriptions(place, action_array):
      Campground_Description = 'You arrive back at your small campground, the fire still burning brightly.'
@@ -482,6 +585,8 @@ def zorg():
 
  while True:
     going_this_direction = direction(place)
+    robot_direction = going_this_direction
+    old_robot_direction = robot_go_zorg(robot, robot_direction, old_robot_direction)
     for k in range(50):
         print('')
     if action_array[7] == 1:
