@@ -2,7 +2,7 @@
 # It exists here as a place where you can "try out" things without harm.
 def main():
  place = 'Campground'
- action_array = [0, 0, 0, 0, 0, 0, 0]
+ action_array = [0, 0, 0, 0, 0, 0, 0, 0]
 
  def place_discriptions(place, action_array):
      Campground_Description = 'You arrive back at your small campground, the fire still burning brightly.'
@@ -32,7 +32,7 @@ def main():
          Ridge_Description = 'A large rock has several hammer marks from the large sledgehammer you have taken.'
      if action_array[5] == 1:
          Shack_Description = 'You arrive at the shack, but the door is now non-existent due to you bludgeoning it with' \
-                             'a large sledgehammer, a key appears to be inside!'
+                             ' a large sledgehammer, a key appears to be inside!'
      if action_array[3] == 1:
          Shack_Description = 'You arrive at a shack, but the door is now non-existent due to you bludgeoning it with' \
                              'a large sledgehammer, only junk and dust appear to reside here'
@@ -158,6 +158,9 @@ def main():
          if direction == 'South':
              place = 'Tree With Rope'
              return place
+         if direction == 'Interact':
+             print('You cannot interact with anything at your camp.')
+             return place
 
 
      if place == 'Forest':
@@ -176,17 +179,21 @@ def main():
          if direction == 'West':
              place = 'Forest'
              return place
+         if direction == 'Interact':
+             return place
          else:
              print('You have entered an incorrect direction')
              return place
 
 
      if place == 'Cliff':
+         if direction == 'Interact':
+             return place
          if direction == 'East':
              place = 'Campground'
              return place
          if direction == 'West':
-             if action_array[2] == 1:
+             if action_array[4] == 1:
                 place = 'Ridge'
                 return place
              else:
@@ -198,6 +205,8 @@ def main():
 
 
      if place == 'Ridge':
+         if direction == 'Interact':
+             return place
          if direction == 'East':
              place = 'Cliff'
              return place
@@ -207,6 +216,8 @@ def main():
 
 
      if place == 'Tree With Rope':
+         if direction == 'Interact':
+             return place
          if direction == 'North':
              place = 'Campground'
              return place
@@ -219,6 +230,8 @@ def main():
 
 
      if place == 'Shack':
+         if direction == 'Interact':
+             return place
          if direction == 'North':
              place = 'Tree With Rope'
              return place
@@ -240,6 +253,8 @@ def main():
 
 
      if place == 'House':
+         if direction == 'Interact':
+             return place
          if direction == 'South':
              place = 'Plains'
              return place
@@ -266,6 +281,12 @@ def main():
             print('You have headed,',direction)
 
      if place == 'Gashed Tree':
+         if direction == 'Interact':
+             if action_array[0] == 0:
+                 print('You grip the handle of the knife and remove it from the bark with ease')
+                 action_array[0] = 1
+             elif action_array[0] == 1:
+                 print('You have already removed the knife, there is nothing more to do here.')
          if direction == "West":
              print('You have headed,', direction)
 
@@ -284,7 +305,7 @@ def main():
              print('You have headed,', direction)
 
          if direction == 'West':
-             if action_array[2] == 1:
+             if action_array[4] == 1:
                  print('You have climbed up the rope',direction)
 
      if place == 'Ridge':
@@ -307,19 +328,39 @@ def main():
                      print('You do not have anything to cut the rope with!')
              elif action_array[1] == 1:
                  print('You have already cut the rope, there is nothing else to interact with here.')
-         if direction == 'North' or 'South':
+         if direction == 'North' or direction == 'South':
              print('You have headed,', direction)
 
      if place == 'Shack':
+         if direction == 'Interact':
+             if action_array[5] == 0:
+                 if action_array[2] == 1:
+                     print('You destroy the shack door with the large sledgehammer, now only splinters remain.')
+                     action_array[5] = 1
+                 if action_array[2] == 0:
+                     print('You do not have anything to destroy the shack door.')
+             elif action_array[5] == 1:
+                 if action_array[3] == 0:
+                    print('You grab a key from within the shack.')
+                    action_array[3] = 1
+                 elif action_array[3] == 1:
+                     print('You have already destroyed the door and taken the key, there is nothing left to do here.')
+
          if direction == 'North':
              print('You have headed,', direction)
 
      if place == 'Plains':
-         if direction == 'North' or 'South':
+         if direction == 'North' or direction == 'South':
              print('You have headed,', direction)
 
 
      if place == 'House':
+         if direction == 'Interact':
+             if action_array[3] == 1:
+                 print('You open the house door with the key, on the counter is your belongings.')
+                 action_array[7] = 1
+             if action_array[3] == 0:
+                 print('You do not have a key to open the door!')
          if direction == 'South':
              print('You have headed,', direction)
      print('')
@@ -330,14 +371,18 @@ def main():
      place_discription = place_discriptions(place, action_array)
      print(place_discription)
      print('')
-     print('To the North,', direction_discription[0])
-     print('')
-     print('To the East,', direction_discription[1])
-     print('')
-     print('To the South,', direction_discription[2])
-     print('')
-     print('To the West,', direction_discription[3])
-     print('')
+     if direction_discription[0] != 'nothing appears to be in this direction':
+         print('To the North,', direction_discription[0])
+         print('')
+     if direction_discription[1] != 'nothing appears to be in this direction':
+        print('To the East,', direction_discription[1])
+        print('')
+     if direction_discription[2] != 'nothing appears to be in this direction':
+        print('To the South,', direction_discription[2])
+        print('')
+     if direction_discription[3] != 'nothing appears to be in this direction':
+        print('To the West,', direction_discription[3])
+        print('')
 
 
 
@@ -346,8 +391,12 @@ def main():
  while True:
 
     going_this_direction = direction(place)
+    if action_array[7] == 1:
+        break
     place = where_am_i_now(place, going_this_direction)
     position(place, action_array)
+ print('Congratulations! You have won!')
+
 
 
 
