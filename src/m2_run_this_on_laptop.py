@@ -16,6 +16,7 @@ import shared_gui
 old_direction = 'North'
 direction = ''
 def main():
+    global old_direction
     """
     This code, which must run on a LAPTOP:
       1. Constructs a GUI for my part of the Capstone Project.
@@ -54,11 +55,11 @@ def main():
     west_button.grid(row=1, column=0)
     interact_button.grid(row=1, column=1)
 
-    north_button['command'] = lambda: handle_direction_set(mqtt_sender, 'north')
-    east_button['command'] = lambda: handle_direction_set(mqtt_sender, 'east')
-    south_button['command'] = lambda: handle_direction_set(mqtt_sender,'south')
-    west_button['command'] = lambda: handle_direction_set(mqtt_sender, 'west')
-    interact_button['command'] = lambda: handle_direction_set(mqtt_sender,'interact')
+    north_button['command'] = lambda: handle_direction_set(mqtt_sender, 'north', old_direction)
+    east_button['command'] = lambda: handle_direction_set(mqtt_sender, 'east', old_direction)
+    south_button['command'] = lambda: handle_direction_set(mqtt_sender,'south', old_direction)
+    west_button['command'] = lambda: handle_direction_set(mqtt_sender, 'west',old_direction)
+    interact_button['command'] = lambda: handle_direction_set(mqtt_sender,'interact', old_direction)
 
     # -------------------------------------------------------------------------
     # Sub-frames for the shared GUI that the team developed:
@@ -105,7 +106,6 @@ def grid_frames(teleop_frame,drive_system_frame, arm_frame, sound_system_frame, 
 
 def zorg():
  robot = rosebot.RoseBot()
- old_robot_direction = 'North'
  place = 'Campground'
  action_array = [0, 0, 0, 0, 0, 0, 0, 0]
  print('MADE IT')
@@ -551,7 +551,7 @@ def handle_direction_set(mqtt_sender, new_direction, old_direction):
 
 
 
-zorg()
+
 
 
 # -----------------------------------------------------------------------------
