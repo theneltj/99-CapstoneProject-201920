@@ -54,11 +54,11 @@ def main():
     west_button.grid(row=1, column=0)
     interact_button.grid(row=1, column=1)
 
-    north_button['command'] = lambda: direction_set(mqtt_sender, 'north')
-    east_button['command'] = lambda: direction_set(mqtt_sender, 'east')
-    south_button['command'] = lambda: direction_set(mqtt_sender,'south')
-    west_button['command'] = lambda: direction_set(mqtt_sender, 'west')
-    interact_button['command'] = lambda: direction_set(mqtt_sender,'interact')
+    north_button['command'] = lambda: handle_direction_set(mqtt_sender, 'north')
+    east_button['command'] = lambda: handle_direction_set(mqtt_sender, 'east')
+    south_button['command'] = lambda: handle_direction_set(mqtt_sender,'south')
+    west_button['command'] = lambda: handle_direction_set(mqtt_sender, 'west')
+    interact_button['command'] = lambda: handle_direction_set(mqtt_sender,'interact')
 
     # -------------------------------------------------------------------------
     # Sub-frames for the shared GUI that the team developed:
@@ -640,7 +640,7 @@ def zorg():
 
 
 
-def direction_set(mqtt_sender, new_direction):
+def handle_direction_set(mqtt_sender, new_direction):
     direction = new_direction
     if direction == 'north':
         mqtt_sender.send_message('robot_go_zorg', [direction, 'south'])
