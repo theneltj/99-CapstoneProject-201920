@@ -267,11 +267,12 @@ class DriveSystem(object):
         average = total/10
         return average
 
+    """"Goes forward until distance is 10 inches and then travels the remainder using the more accurate encoder"""
     def batman_acquire_target(self):
         self.go(30, 30)
         while self.sensor_system.ir_proximity_sensor.get_distance_in_inches() > 10:
             pass
-        self.go_straight_for_inches_using_encoder(6.5, 30)
+        self.go_straight_for_inches_using_encoder(6, 30)
         self.stop()
 
 

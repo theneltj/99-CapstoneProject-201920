@@ -20,8 +20,11 @@ def main():
     robot = rosebot.RoseBot()
     robot.sound_system.tone_maker.play_tone(100, 500)
     robot.drive_system.stop()
+
+    """"Wait for response from GUI or keybindings"""
     real_thing()
 
+""""Function that waits for inputs on GUI"""
 def real_thing():
     robot = rosebot.RoseBot()
     delegate = shared_gui_delegate_on_robot.ResponderToGUIMessages(robot)

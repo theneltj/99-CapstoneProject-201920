@@ -145,6 +145,7 @@ class ResponderToGUIMessages(object):
             self.robot.drive_system.spin_counterclockwise_until_sees_object(speed, 200)
         self.increasing_pitch_pickup(speed)
 
+    """"Plays the original cartoon/tv theme commonly referred to as Dunna Dunna Dunna Dunna- Batman!"""
     def play_cartoon_theme(self):
         for _ in range(4):
             self.robot.sound_system.tone_maker.play_tone(587.33, 50)
@@ -165,6 +166,7 @@ class ResponderToGUIMessages(object):
             time.sleep(.05)
         self.robot.sound_system.speech_maker.speak('Batman')
 
+    """"Plays the movie theme using tones and pauses"""
     def play_movie_theme(self):
         self.robot.sound_system.tone_maker.play_tone(293.66, 100)
         time.sleep(.1)
@@ -190,6 +192,12 @@ class ResponderToGUIMessages(object):
         self.robot.sound_system.tone_maker.play_tone(523.25, 150)
         time.sleep(.15)
 
+    """"The following capture frames are all repeated junks that use change the color signature before running the next
+    parts of the code. The area used in the spin_clockwise function also slightly differ due to different 
+    sensitivities with the colors. THEY EACH TARGET THE SPECIFIED CHARACTER. After locating the desired color signature,
+    the robot calls the acquire_target function which puts the character in range of the arm and claw. After that, the
+    arm is raised and the Bat-bot waits for information to be sent to it from the user regarding what is to be done with
+    the character"""
     def capture_joker(self):
         self.robot.sensor_system.camera.set_signature('SIG1')
         self.robot.drive_system.spin_clockwise_until_sees_object(30, 600)
@@ -214,9 +222,14 @@ class ResponderToGUIMessages(object):
         self.robot.drive_system.batman_acquire_target()
         self.robot.arm_and_claw.raise_arm()
 
+    """"The say_phrase function will say the phrase given to it by the GUI. This is either the main catch phrase 
+    or a custom phrase inserted by the user"""
     def say_phrase(self, phrase):
         self.robot.sound_system.speech_maker.speak(phrase)
 
+    """"The deliver function takes the keybinding given and reassigns the pressed key to the number 
+    associated with the desired color. The function then calls functions from sprint 2 and drives 
+    until we land on the color. We then also lower the arm"""
     def deliver(self, first_letter_of_color):
         if first_letter_of_color == 'w':
             color = 6

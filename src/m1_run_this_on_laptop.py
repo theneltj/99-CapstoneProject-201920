@@ -46,6 +46,7 @@ def main():
     batman_main_frame_label.config(width=68)
     batman_main_frame_label.grid(row=0, column=0)
 
+    """"Add picture to my gui from my files"""
     filename = PhotoImage(file="C:\\Users\\theneltj\\Pictures\\Batman.png")
     batman_main_frame_image = ttk.Label(batman_main_frame, image=filename)
     batman_main_frame_image.grid(row=1, column=0)
@@ -68,6 +69,8 @@ def main():
     # Grid the frames.
     # -------------------------------------------------------------------------
 
+    """The keybinding to control the robot and its direction. Use the arrow keys and slash to move and stop
+    Use the first letter of the desired color dropoff to begin heading until the color is found"""
     root.bind('<Up>', lambda event: mqtt_sender.send_message('go', [100, 100]))
     root.bind('<Left>', lambda event: mqtt_sender.send_message('go', [-30, 30]))
     root.bind('<Right>', lambda event: mqtt_sender.send_message('go', [30, -30]))
@@ -105,6 +108,7 @@ def grid_frames(teleop_frame, drive_system_frame, arm_frame, sound_system_frame,
     control_frame.grid(row=5, column=0)
     my_m1_frame.grid(row=0,column=1)
 
+""""Gets the batman frames from the shared gui"""
 def get_batman_frames(batman_main_frame, mqtt_sender):
     batman_music_frame = shared_gui.get_batman_music_frame(batman_main_frame, mqtt_sender)
     batman_capture_frame = shared_gui.get_batman_capture_frame(batman_main_frame, mqtt_sender)
@@ -112,6 +116,7 @@ def get_batman_frames(batman_main_frame, mqtt_sender):
     batman_catchphrase_frame = shared_gui.get_batman_catchphrase_frame(batman_main_frame, mqtt_sender)
     return batman_music_frame, batman_capture_frame, batman_save_frame, batman_catchphrase_frame
 
+""""Grid the frames to the side frame which sits adjacent to the logo"""
 def grid_batman_frames(batman_music_frame, batman_capture_frame, batman_save_frame, batman_catchphrase_frame):
     batman_music_frame.grid(row=1, column=2)
     batman_capture_frame.grid(row=2, column=2)

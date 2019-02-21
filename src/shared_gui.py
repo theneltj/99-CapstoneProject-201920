@@ -359,6 +359,7 @@ def get_control_frame(window, mqtt_sender):
 
     return frame
 
+"""Creates the music frame with 2 options: Cartoon or Movie theme"""
 def get_batman_music_frame(window, mqtt_sender):
     frame = ttk.Frame(window, padding=10, borderwidth=5, relief="ridge")
     frame.grid()
@@ -375,6 +376,8 @@ def get_batman_music_frame(window, mqtt_sender):
 
     return frame
 
+"""This function creates and returns the different villians that are to be captured by the robot. Clicking on one 
+initiates the robots capture abilities"""
 def get_batman_capture_frame(window, mqtt_sender):
     frame = ttk.Frame(window, padding=10, borderwidth=5, relief="ridge")
     frame.grid()
@@ -391,6 +394,8 @@ def get_batman_capture_frame(window, mqtt_sender):
 
     return frame
 
+"""This function creates and returns the different friends/characters that are to be saved by the robot. 
+Clicking on one initiates the robots save abilities"""
 def get_batman_save_frame(window, mqtt_sender):
     frame = ttk.Frame(window, padding=10, borderwidth=5, relief="ridge")
     frame.grid()
@@ -407,6 +412,8 @@ def get_batman_save_frame(window, mqtt_sender):
 
     return frame
 
+"""The catchphrase function sends information to the robot including the original catchphrase or a custom one created
+by the user."""
 def get_batman_catchphrase_frame(window, mqtt_sender):
     frame = ttk.Frame(window, padding=10, borderwidth=5, relief="ridge")
     frame.grid()
