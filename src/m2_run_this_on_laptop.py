@@ -13,10 +13,10 @@ import rosebot
 import time
 from tkinter import ttk
 import shared_gui
-old_direction = 'North'
+old_direction = 'north'
 direction = ''
+
 def main():
-    robot = rosebot.RoseBot()
     """
     This code, which must run on a LAPTOP:
       1. Constructs a GUI for my part of the Capstone Project.
@@ -54,12 +54,12 @@ def main():
     south_button.grid(row=2, column=1)
     west_button.grid(row=1, column=0)
     interact_button.grid(row=1, column=1)
-
-    north_button['command'] = lambda: handle_direction_set(mqtt_sender, 'north', robot)
-    east_button['command'] = lambda: handle_direction_set(mqtt_sender, 'east', robot)
-    south_button['command'] = lambda: handle_direction_set(mqtt_sender,'south', robot)
-    west_button['command'] = lambda: handle_direction_set(mqtt_sender, 'west', robot)
-    interact_button['command'] = lambda: handle_direction_set(mqtt_sender,'interact', robot)
+    robot ='north'
+    north_button['command'] = lambda: handle_direction_set(mqtt_sender, 'north')
+    east_button['command'] = lambda: handle_direction_set(mqtt_sender, 'east')
+    south_button['command'] = lambda: handle_direction_set(mqtt_sender,'south')
+    west_button['command'] = lambda: handle_direction_set(mqtt_sender, 'west')
+    interact_button['command'] = lambda: handle_direction_set(mqtt_sender,'interact')
 
     # -------------------------------------------------------------------------
     # Sub-frames for the shared GUI that the team developed:
@@ -105,7 +105,6 @@ def grid_frames(teleop_frame,drive_system_frame, arm_frame, sound_system_frame, 
     my_m2_frame.grid(row=0, column=1)
 
 def zorg():
- robot = rosebot.RoseBot()
  place = 'Campground'
  action_array = [0, 0, 0, 0, 0, 0, 0, 0]
  print('MADE IT')
@@ -527,16 +526,21 @@ def zorg():
 
 
 
-def handle_direction_set(mqtt_sender, new_direction, robot):
+def handle_direction_set(mqtt_sender, new_direction):
+    global old_direction
     direction = new_direction
     if direction == 'north':
-        robot.direction = mqtt_sender.send_message('robot_go_zorg', [direction, robot.direction])
+        mqtt_sender.send_message('robot_go_zorg', [direction, old_direction])
+        old_direction = new_direction
     elif direction == 'south':
-       robot.direction = mqtt_sender.send_message('robot_go_zorg', [direction, robot.direction])
+       mqtt_sender.send_message('robot_go_zorg', [direction, old_direction])
+       old_direction = new_direction
     elif direction == 'west':
-        robot.direction = mqtt_sender.send_message('robot_go_zorg', [direction, robot.direction])
+        mqtt_sender.send_message('robot_go_zorg', [direction, old_direction])
+        old_direction = 'west'
     elif direction == 'east':
-        robot.direction = mqtt_sender.send_message('robot_go_zorg', [direction, robot.direction])
+        mqtt_sender.send_message('robot_go_zorg', [direction, old_direction])
+        old_direction = 'east'
     elif direction == 'interact':
         mqtt_sender.send_message('stop')
 
