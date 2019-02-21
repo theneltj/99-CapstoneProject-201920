@@ -18,10 +18,134 @@ class ResponderToGUIMessages(object):
         self.robot = robot
         self.stop_program = False
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     def go(self, left_wheel_speed, right_wheel_speed):
         left = int(left_wheel_speed)
         right = int(right_wheel_speed)
         self.robot.drive_system.go(left, right)
+
+    def robot_go_zorg(self,robot_direction, old_robot_direction):
+            if (old_robot_direction == 'north'):
+                if (robot_direction == 'east'):
+
+                    self.robot.drive_system.go(50, -50)
+                    time.sleep(2.1)
+                    self.robot.drive_system.stop()
+                    self.robot.sound_system.speech_maker.speak("I am going East")
+                    self.robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                    return ('east')
+                elif (robot_direction == 'south'):
+                    self.robot.drive_system.go(50, -50)
+                    time.sleep(4.2)
+                    self.robot.drive_system.stop()
+                    self.robot.sound_system.speech_maker.speak("I am going South")
+                    self.robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                    return ('south')
+                elif (robot_direction == 'west'):
+                    self.robot.drive_system.go(-50, 50)
+                    time.sleep(2.1)
+                    self.robot.drive_system.stop()
+                    self.robot.sound_system.speech_maker.speak("I am going West")
+                    self.robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                    return ('west')
+                elif (robot_direction == 'north'):
+                    self.robot.sound_system.speech_maker.speak("I am going North")
+                    self.robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                    return ('north')
+            elif (old_robot_direction == 'east'):
+                robot_direction = input('new')
+                if (robot_direction == 'east'):
+                    self.robot.sound_system.speech_maker.speak("I am going East")
+                    self.robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                    return ('east')
+                elif (robot_direction == 'south'):
+                    self.robot.drive_system.go(50, -50)
+                    time.sleep(2.1)
+                    self.robot.drive_system.stop()
+                    self.robot.sound_system.speech_maker.speak("I am going South")
+                    self.robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                    return ('south')
+                elif (robot_direction == 'west'):
+                    self.robot.drive_system.go(50, -50)
+                    time.sleep(4.2)
+                    self.robot.drive_system.stop()
+                    self.robot.sound_system.speech_maker.speak("I am going West")
+                    self.robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                    return ('west')
+                elif (robot_direction == 'north'):
+                    self.robot.drive_system.go(-50, 50)
+                    time.sleep(2.1)
+                    self.robot.drive_system.stop()
+                    self.robot.sound_system.speech_maker.speak("I am going North")
+                    self.robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                    return ('north')
+            elif (old_robot_direction == 'south'):
+                robot_direction = input('new')
+                if (robot_direction == 'east'):
+                    self.robot.drive_system.go(-50, 50)
+                    time.sleep(2.1)
+                    self.robot.drive_system.stop()
+                    self.robot.sound_system.speech_maker.speak("I am going East")
+                    self.robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                    return ('east')
+                elif (robot_direction == 'south'):
+                    self.robot.sound_system.speech_maker.speak("I am going South")
+                    self.robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                    return ('south')
+                elif (robot_direction == 'west'):
+                    self.robot.drive_system.go(50, -50)
+                    time.sleep(2.1)
+                    self.robot.drive_system.stop()
+                    self.robot.sound_system.speech_maker.speak("I am going West")
+                    self.robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                    return ('west')
+                elif (robot_direction == 'north'):
+                    self.robot.drive_system.go(50, -50)
+                    time.sleep(4.2)
+                    self.robot.drive_system.stop()
+                    self.robot.sound_system.speech_maker.speak("I am going North")
+                    self.robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                    return ('north')
+
+            elif (old_robot_direction == 'west'):
+                robot_direction = input('new')
+                if (robot_direction == 'east'):
+                    self.robot.drive_system.go(50, -50)
+                    time.sleep(4.2)
+                    self.robot.drive_system.stop()
+                    self.robot.sound_system.speech_maker.speak("I am going East")
+                    self.robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                    return ('east')
+                elif (robot_direction == 'south'):
+                    self.robot.drive_system.go(-50, 50)
+                    time.sleep(2.1)
+                    self.robot.drive_system.stop()
+                    self.robot.sound_system.speech_maker.speak("I am going South")
+                    self.robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                    return ('south')
+                elif (robot_direction == 'west'):
+                    self.robot.sound_system.speech_maker.speak("I am going West")
+                    self.robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                    return ('west')
+                elif (robot_direction == 'north'):
+                    self.robot.drive_system.go(50, -50)
+                    time.sleep(2.1)
+                    self.robot.drive_system.stop()
+                    self.robot.sound_system.speech_maker.speak("I am going North")
+                    self.robot.drive_system.go_straight_for_inches_using_time(5, 100)
+                    return ('north')
 
     def stop(self):
         self.robot.drive_system.stop()

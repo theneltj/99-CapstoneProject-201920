@@ -37,9 +37,9 @@ def main():
     # The main frame, upon which the other frames are placed.
     # -------------------------------------------------------------------------
     main_frame = ttk.Frame(root, padding=10, borderwidth=5, relief="groove")
-    #main_frame.grid()
+    main_frame.grid()
     zorg_frame = ttk.Frame(root, padding=10, borderwidth=5, relief="groove")
-    zorg_frame.grid()
+    #zorg_frame.grid()
 
     frame = ttk.Frame(zorg_frame, padding=10, borderwidth=5, relief="ridge")
     frame.grid()
@@ -54,8 +54,8 @@ def main():
     west_button.grid(row=1, column=0)
     interact_button.grid(row=1, column=1)
 
-    north_button['command'] = lambda: direction_set('North')
-    east_button['command'] = lambda: direction_set('East')
+    north_button['command'] = lambda: handle_north(mqtt_sender)
+    east_button['command'] = lambda: direction_set(mqtt_sender)
     south_button['command'] = lambda: direction_set('South')
     west_button['command'] = lambda: direction_set('West')
     interact_button['command'] = lambda: direction_set('Interact')
@@ -76,7 +76,7 @@ def main():
     # Grid the frames.
     # -------------------------------------------------------------------------
 
-    zorg()
+
     # -------------------------------------------------------------------------
     # The event loop:
     # -------------------------------------------------------------------------
@@ -644,6 +644,16 @@ def direction_set(new_direction):
     direction = new_direction
     print(direction)
 
+def handle_north(mqtt_sender):
+    print('Going North')
+    mqtt_sender.send_message('go',[25, 25])
+
+def handle_south(mqtt_sender):
+    print('Going South')
+    mqtt_sender.send_message('go', [-25, -25])
+def handle_interact(mqtt_sender):
+    print('Interact')
+    mqtt_sender.send_message('stop')
 
 
 

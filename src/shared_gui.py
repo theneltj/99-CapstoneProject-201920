@@ -665,3 +665,10 @@ def handle_phrase(mqtt_sender, phrase):
     print('Saying Phrase')
     print(phrase)
     mqtt_sender.send_message('say_phrase', [phrase])
+
+
+    ###########################################
+def handle_north(mqtt_sender):
+    print('Going North')
+    mqtt_sender.send_message()
+
