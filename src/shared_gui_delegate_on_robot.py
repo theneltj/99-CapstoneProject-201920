@@ -65,7 +65,7 @@ class ResponderToGUIMessages(object):
                     self.robot.drive_system.go_straight_for_inches_using_time(5, 100)
                     return ('north')
             elif (old_robot_direction == 'east'):
-                robot_direction = input('new')
+
                 if (robot_direction == 'east'):
                     self.robot.sound_system.speech_maker.speak("I am going East")
                     self.robot.drive_system.go_straight_for_inches_using_time(5, 100)
@@ -92,7 +92,6 @@ class ResponderToGUIMessages(object):
                     self.robot.drive_system.go_straight_for_inches_using_time(5, 100)
                     return ('north')
             elif (old_robot_direction == 'south'):
-                robot_direction = input('new')
                 if (robot_direction == 'east'):
                     self.robot.drive_system.go(-50, 50)
                     time.sleep(2.1)
@@ -120,7 +119,6 @@ class ResponderToGUIMessages(object):
                     return ('north')
 
             elif (old_robot_direction == 'west'):
-                robot_direction = input('new')
                 if (robot_direction == 'east'):
                     self.robot.drive_system.go(50, -50)
                     time.sleep(4.2)

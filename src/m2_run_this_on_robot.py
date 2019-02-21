@@ -18,9 +18,9 @@ def main():
     # robot.arm_and_claw.move_arm_to_position(180*14.2)
     # robot.arm_and_claw.lower_arm()
     robot.sound_system.beeper.beep()
-    robot.drive_system.go(50, -50)
-    time.sleep(4.2)
-    robot.drive_system.stop()
+    #robot.drive_system.go(50, -50)
+    #time.sleep(4.2)
+    #robot.drive_system.stop()
     # def increased_pitch_pickup(robot, speed):
     #     robot.drive_system(speed, speed)
     #     while robot.sensor_system.ir_proximity_sensor.get_distance() > 3:
