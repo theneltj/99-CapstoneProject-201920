@@ -13,7 +13,7 @@ import rosebot
 import time
 from tkinter import ttk
 import shared_gui
-old_direction = 'north'
+old_direction = 'North'
 is_button_pressed = 'no'
 incorrect_direction = [0]
 going_this_direction = ''
@@ -116,7 +116,6 @@ def zorg():
  def handle_direction_set(mqtt_sender, new_direction):
      global old_direction
      direction = new_direction
-     print(direction)
      if direction == 'North':
          mqtt_sender.send_message('robot_go_zorg', [direction, old_direction])
          old_direction = new_direction
@@ -408,6 +407,8 @@ def zorg():
 
 
  def direction(place, direction):
+     for k in range(25):
+         print('')
      global is_button_pressed
      global going_this_direction
      while True:
@@ -585,8 +586,6 @@ def zorg():
  while True:
     incorrect_direction = [0]
     if is_button_pressed == 'yes':
-        for k in range(50):
-            print('')
         if action_array[7] == 1:
             break
         place = where_am_i_now(place, going_this_direction, incorrect_direction)
