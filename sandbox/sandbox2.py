@@ -1,5 +1,6 @@
 # Put whatever you want in this module and do whatever you want with it.
 # It exists here as a place where you can "try out" things without harm.
+import os
 def main():
  place = 'Campground'
  action_array = [0, 0, 0, 0, 0, 0, 0, 0]
@@ -267,6 +268,16 @@ def main():
  def direction(place):
      while True:
          direction = str(input('What direction would you like to go? If you would like to interact instead input "Interact"'))
+         if direction == 'west':
+             direction = 'West'
+         if direction == 'east':
+             direction = 'East'
+         if direction == 'south':
+             direction = 'South'
+         if direction == 'north':
+             direction = 'North'
+         if direction == 'interact':
+             direction = 'Interact'
 
          if direction == "West" or direction == 'East' or direction == 'South' or direction == 'North' or direction == 'Interact':
              break
@@ -385,16 +396,23 @@ def main():
         print('')
 
 
-
+ print('You arrive at a small campground with a campfire burning brightly. With your tools recently stolen by a group '
+       'of bandits, you are left without anything.')
+ print('Rumor has it they live in an old house somewhere in this area.You must retrieve your tools in order to win.')
  position(place, action_array)
 
  while True:
 
     going_this_direction = direction(place)
+    for k in range(50):
+        print('')
     if action_array[7] == 1:
         break
     place = where_am_i_now(place, going_this_direction)
     position(place, action_array)
+
+
+
  print('Congratulations! You have won!')
 
 
