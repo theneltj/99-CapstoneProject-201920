@@ -14,7 +14,7 @@ import time
 from tkinter import ttk
 import shared_gui
 
-
+direction = ''
 def main():
     """
     This code, which must run on a LAPTOP:
@@ -37,7 +37,28 @@ def main():
     # The main frame, upon which the other frames are placed.
     # -------------------------------------------------------------------------
     main_frame = ttk.Frame(root, padding=10, borderwidth=5, relief="groove")
-    main_frame.grid()
+    #main_frame.grid()
+    zorg_frame = ttk.Frame(root, padding=10, borderwidth=5, relief="groove")
+    zorg_frame.grid()
+
+    frame = ttk.Frame(zorg_frame, padding=10, borderwidth=5, relief="ridge")
+    frame.grid()
+    north_button = ttk.Button(frame, text='North')
+    east_button = ttk.Button(frame, text='East')
+    south_button = ttk.Button(frame, text='South')
+    west_button = ttk.Button(frame, text='West')
+    interact_button = ttk.Button(frame, text='Interact')
+    north_button.grid(row=0, column = 1)
+    east_button.grid(row=1, column=2)
+    south_button.grid(row=2, column=1)
+    west_button.grid(row=1, column=0)
+    interact_button.grid(row=1, column=1)
+
+    north_button['command'] = lambda: direction_set('North')
+    east_button['command'] = lambda: direction_set('East')
+    south_button['command'] = lambda: direction_set('South')
+    west_button['command'] = lambda: direction_set('West')
+    interact_button['command'] = lambda: direction_set('Interact')
 
     # -------------------------------------------------------------------------
     # Sub-frames for the shared GUI that the team developed:
@@ -55,11 +76,12 @@ def main():
     # Grid the frames.
     # -------------------------------------------------------------------------
 
-
+    zorg()
     # -------------------------------------------------------------------------
     # The event loop:
     # -------------------------------------------------------------------------
     root.mainloop()
+
 
 
 def get_shared_frames(main_frame, mqtt_sender):
@@ -86,6 +108,7 @@ def zorg():
  old_robot_direction = 'North'
  place = 'Campground'
  action_array = [0, 0, 0, 0, 0, 0, 0, 0]
+ print('MADE IT')
 
  def robot_go_zorg(robot, robot_direction, old_robot_direction):
          while True:
@@ -463,9 +486,9 @@ def zorg():
 
 
 
- def direction(place):
+ def direction(place, direction):
      while True:
-         direction = str(input('What direction would you like to go? If you would like to interact instead input "Interact"'))
+
          if direction == 'west':
              direction = 'West'
          if direction == 'east':
@@ -601,7 +624,7 @@ def zorg():
  position(place, action_array)
 
  while True:
-    going_this_direction = direction(place)
+    going_this_direction = direction(place, direction)
     robot_direction = going_this_direction
     old_robot_direction = robot_go_zorg(robot, robot_direction, old_robot_direction)
     for k in range(50):
@@ -617,10 +640,9 @@ def zorg():
 
 
 
-
-
-
-
+def direction_set(new_direction):
+    direction = new_direction
+    print(direction)
 
 
 

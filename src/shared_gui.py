@@ -434,6 +434,7 @@ def get_batman_catchphrase_frame(window, mqtt_sender):
 
     return frame
 
+
 ###############################################################################
 ###############################################################################
 # The following specifies, for each Button,
