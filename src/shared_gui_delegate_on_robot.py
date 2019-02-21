@@ -244,7 +244,7 @@ class ResponderToGUIMessages(object):
 
     def Hunt(self):
         whats_around=self.robot.sensor_system.color_sensor.get_color()
-        if whats_around == 7:
+        if whats_around == 6:
             self.robot.drive_system.Land()
         elif whats_around == 5:
             self.robot.drive_system.Blood()

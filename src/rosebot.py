@@ -385,7 +385,7 @@ class DriveSystem(object):
         self.stop()
         if self.sensor_system.color_sensor.get_color() == 2:
             self.Beach()
-        elif self.sensor_system.color_sensor.get_color() == 7:
+        elif self.sensor_system.color_sensor.get_color() == 6:
             self.Land()
         elif self.sensor_system.color_sensor.get_color() == 5:
             self.Blood()
@@ -395,7 +395,7 @@ class DriveSystem(object):
             self.stop()
             if self.sensor_system.color_sensor.get_color() == 2:
                 self.Beach()
-            elif self.sensor_system.color_sensor.get_color() == 7:
+            elif self.sensor_system.color_sensor.get_color() == 6:
                 self.Land()
             elif self.sensor_system.color_sensor.get_color() == 5:
                 self.Blood()
