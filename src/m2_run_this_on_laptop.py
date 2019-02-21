@@ -14,7 +14,9 @@ import time
 from tkinter import ttk
 import shared_gui
 old_direction = 'north'
-direction = ''
+is_button_pressed = 'no'
+incorrect_direction = [0]
+going_this_direction = ''
 
 def main():
     """
@@ -25,48 +27,47 @@ def main():
     # -------------------------------------------------------------------------
     # Construct and connect the MQTT Client:
     # -------------------------------------------------------------------------
-    mqtt_sender = com.MqttClient()
-    mqtt_sender.connect_to_ev3()
+    # mqtt_sender = com.MqttClient()
+    # mqtt_sender.connect_to_ev3()
 
     # -------------------------------------------------------------------------
     # The root TK object for the GUI:
     # -------------------------------------------------------------------------
-    root = tkinter.Tk()
-    root.title("CSSE 120 Capstone Project, Winter 2018-19 Jacob Jarski")
+    # root = tkinter.Tk()
+    # root.title("CSSE 120 Capstone Project, Winter 2018-19 Jacob Jarski")
 
     # -------------------------------------------------------------------------
     # The main frame, upon which the other frames are placed.
     # -------------------------------------------------------------------------
-    main_frame = ttk.Frame(root, padding=10, borderwidth=5, relief="groove")
+    # main_frame = ttk.Frame(root, padding=10, borderwidth=5, relief="groove")
     #main_frame.grid()
-    zorg_frame = ttk.Frame(root, padding=10, borderwidth=5, relief="groove")
-    zorg_frame.grid()
-
-    frame = ttk.Frame(zorg_frame, padding=10, borderwidth=5, relief="ridge")
-    frame.grid()
-    north_button = ttk.Button(frame, text='North')
-    east_button = ttk.Button(frame, text='East')
-    south_button = ttk.Button(frame, text='South')
-    west_button = ttk.Button(frame, text='West')
-    interact_button = ttk.Button(frame, text='Interact')
-    north_button.grid(row=0, column = 1)
-    east_button.grid(row=1, column=2)
-    south_button.grid(row=2, column=1)
-    west_button.grid(row=1, column=0)
-    interact_button.grid(row=1, column=1)
-    robot ='north'
-    north_button['command'] = lambda: handle_direction_set(mqtt_sender, 'north')
-    east_button['command'] = lambda: handle_direction_set(mqtt_sender, 'east')
-    south_button['command'] = lambda: handle_direction_set(mqtt_sender,'south')
-    west_button['command'] = lambda: handle_direction_set(mqtt_sender, 'west')
-    interact_button['command'] = lambda: handle_direction_set(mqtt_sender,'interact')
+    # zorg_frame = ttk.Frame(root, padding=10, borderwidth=5, relief="groove")
+    # zorg_frame.grid()
+    #
+    # frame = ttk.Frame(zorg_frame, padding=10, borderwidth=5, relief="ridge")
+    # frame.grid()
+    # north_button = ttk.Button(frame, text='North')
+    # east_button = ttk.Button(frame, text='East')
+    # south_button = ttk.Button(frame, text='South')
+    # west_button = ttk.Button(frame, text='West')
+    # interact_button = ttk.Button(frame, text='Interact')
+    # north_button.grid(row=0, column = 1)
+    # east_button.grid(row=1, column=2)
+    # south_button.grid(row=2, column=1)
+    # west_button.grid(row=1, column=0)
+    # interact_button.grid(row=1, column=1)
+    # north_button['command'] = lambda: handle_direction_set(mqtt_sender, 'north')
+    # east_button['command'] = lambda: handle_direction_set(mqtt_sender, 'east')
+    # south_button['command'] = lambda: handle_direction_set(mqtt_sender,'south')
+    # west_button['command'] = lambda: handle_direction_set(mqtt_sender, 'west')
+    # interact_button['command'] = lambda: handle_direction_set(mqtt_sender,'interact')
 
     # -------------------------------------------------------------------------
     # Sub-frames for the shared GUI that the team developed:
     # -------------------------------------------------------------------------
-    teleop_frame, drive_system_frame, arm_frame, sound_system_frame, control_frame, my_m2_frame = get_shared_frames(main_frame, mqtt_sender)
+    # teleop_frame, drive_system_frame, arm_frame, sound_system_frame, control_frame, my_m2_frame = get_shared_frames(main_frame, mqtt_sender)
 
-    grid_frames(teleop_frame, drive_system_frame, arm_frame,sound_system_frame, control_frame, my_m2_frame)
+    # grid_frames(teleop_frame, drive_system_frame, arm_frame,sound_system_frame, control_frame, my_m2_frame)
 
     # -------------------------------------------------------------------------
     # Frames that are particular to my individual contributions to the project.
@@ -81,7 +82,7 @@ def main():
     # -------------------------------------------------------------------------
     # The event loop:
     # -------------------------------------------------------------------------
-    root.mainloop()
+    # root.mainloop()
 
 
 
@@ -108,8 +109,30 @@ def zorg():
  place = 'Campground'
  action_array = [0, 0, 0, 0, 0, 0, 0, 0]
  print('MADE IT')
+ global incorrect_direction
+ global is_button_pressed
+ global going_this_direction
 
-
+ def handle_direction_set(mqtt_sender, new_direction):
+     global old_direction
+     direction = new_direction
+     print(direction)
+     if direction == 'North':
+         mqtt_sender.send_message('robot_go_zorg', [direction, old_direction])
+         old_direction = new_direction
+     elif direction == 'South':
+         mqtt_sender.send_message('robot_go_zorg', [direction, old_direction])
+         old_direction = new_direction
+     elif direction == 'West':
+         mqtt_sender.send_message('robot_go_zorg', [direction, old_direction])
+         old_direction = 'West'
+     elif direction == 'East':
+         mqtt_sender.send_message('robot_go_zorg', [direction, old_direction])
+         old_direction = 'East'
+     elif direction == 'Interact':
+         mqtt_sender.send_message('stop')
+     else:
+         print('Testing')
 
 
 
@@ -254,7 +277,7 @@ def zorg():
 
 
 
- def where_am_i_now(place, direction):
+ def where_am_i_now(place, direction, incorrect_direction):
      if place == 'Campground':
          if direction == 'East':
              place = 'Forest'
@@ -270,6 +293,7 @@ def zorg():
              return place
          if direction == 'Interact':
              print('You cannot interact with anything at your camp.')
+             incorrect_direction[0] = 1
              return place
 
 
@@ -282,6 +306,7 @@ def zorg():
             return place
         else:
             print('You have entered an incorrect direction')
+            incorrect_direction[0] = 1
             return place
 
 
@@ -293,6 +318,7 @@ def zorg():
              return place
          else:
              print('You have entered an incorrect direction')
+             incorrect_direction[0] = 1
              return place
 
 
@@ -308,9 +334,11 @@ def zorg():
                 return place
              else:
                  print('You cannot scale the cliff!')
+                 incorrect_direction[0] = 1
                  return place
          else:
              print('You have entered an incorrect direction')
+             incorrect_direction[0] = 1
              return place
 
 
@@ -322,6 +350,7 @@ def zorg():
              return place
          else:
              print('You have entered an incorrect direction')
+             incorrect_direction[0] = 1
              return place
 
 
@@ -336,6 +365,7 @@ def zorg():
              return place
          else:
              print('You have entered an incorrect direction')
+             incorrect_direction[0] = 1
              return place
 
 
@@ -347,6 +377,7 @@ def zorg():
              return place
          else:
              print('You have entered an incorrect direction')
+             incorrect_direction[0] = 1
              return place
 
 
@@ -359,6 +390,7 @@ def zorg():
              return place
          else:
              print('You have entered an incorrect direction')
+             incorrect_direction[0] = 1
              return place
 
 
@@ -370,13 +402,15 @@ def zorg():
              return place
          else:
              print('You have entered an incorrect direction')
+             incorrect_direction[0] = 1
              return place
 
 
 
  def direction(place, direction):
+     global is_button_pressed
+     global going_this_direction
      while True:
-
          if direction == 'west':
              direction = 'West'
          if direction == 'east':
@@ -390,10 +424,12 @@ def zorg():
 
 
          if direction == "West" or direction == 'East' or direction == 'South' or direction == 'North' or direction == 'Interact':
+             is_button_pressed = 'yes'
+             going_this_direction = direction
              break
-         else:
-             print('That is not a correct input, please enter a direction of '
-                   'North, East, South, or West. If you want to interact enter "Interact"')
+         #else:
+             #print('That is not a correct input, please enter a direction of '
+                   #'North, East, South, or West. If you want to interact enter "Interact"')
      if place == 'Campground':
          print('You have headed,', direction)
 
@@ -511,14 +547,61 @@ def zorg():
  print('Rumor has it they live in an old house somewhere in this area.You must retrieve your tools in order to win.')
  position(place, action_array)
 
+ mqtt_sender = com.MqttClient()
+ mqtt_sender.connect_to_ev3()
+
+ root = tkinter.Tk()
+ root.title("CSSE 120 Capstone Project, Winter 2018-19 Jacob Jarski")
+
+ zorg_frame = ttk.Frame(root, padding=10, borderwidth=5, relief="groove")
+ zorg_frame.grid()
+
+ frame = ttk.Frame(zorg_frame, padding=10, borderwidth=5, relief="ridge")
+ frame.grid()
+ north_button = ttk.Button(frame, text='North')
+ east_button = ttk.Button(frame, text='East')
+ south_button = ttk.Button(frame, text='South')
+ west_button = ttk.Button(frame, text='West')
+ interact_button = ttk.Button(frame, text='Interact')
+ north_button.grid(row=0, column=1)
+ east_button.grid(row=1, column=2)
+ south_button.grid(row=2, column=1)
+ west_button.grid(row=1, column=0)
+ interact_button.grid(row=1, column=1)
+ north_button['command'] = lambda: direction(place, 'north')
+ east_button['command'] = lambda: direction(place, 'east')
+ south_button['command'] = lambda: direction(place, 'south')
+ west_button['command'] = lambda: direction(place, 'west')
+ interact_button['command'] = lambda: direction(place, 'interact')
+
+
+
+
+
+
+
+
+
  while True:
-    going_this_direction = direction(place, direction)
-    for k in range(50):
-        print('')
-    if action_array[7] == 1:
-        break
-    place = where_am_i_now(place, going_this_direction)
-    position(place, action_array)
+    incorrect_direction = [0]
+    if is_button_pressed == 'yes':
+        for k in range(50):
+            print('')
+        if action_array[7] == 1:
+            break
+        place = where_am_i_now(place, going_this_direction, incorrect_direction)
+        if incorrect_direction[0] == 0:
+            handle_direction_set(mqtt_sender, going_this_direction)
+        is_button_pressed = 'no'
+        position(place, action_array)
+    root.update()
+
+
+
+
+
+
+
 
 
 
@@ -526,32 +609,13 @@ def zorg():
 
 
 
-def handle_direction_set(mqtt_sender, new_direction):
-    global old_direction
-    direction = new_direction
-    if direction == 'north':
-        mqtt_sender.send_message('robot_go_zorg', [direction, old_direction])
-        old_direction = new_direction
-    elif direction == 'south':
-       mqtt_sender.send_message('robot_go_zorg', [direction, old_direction])
-       old_direction = new_direction
-    elif direction == 'west':
-        mqtt_sender.send_message('robot_go_zorg', [direction, old_direction])
-        old_direction = 'west'
-    elif direction == 'east':
-        mqtt_sender.send_message('robot_go_zorg', [direction, old_direction])
-        old_direction = 'east'
-    elif direction == 'interact':
-        mqtt_sender.send_message('stop')
 
 
 
 
 
 
-
-
-
+zorg()
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
 # -----------------------------------------------------------------------------
